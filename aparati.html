@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zemits Skin Expert — Aparātu klāsts</title>
+<meta name="description" content="Zemits iekārtu katalogs 2026: profesionālas estētiskās kosmetoloģijas iekārtas sejai un ķermenim ar cenām, apmācībām, 24 mēnešu garantiju un servisu Latvijā.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a4a8a'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-style='italic' fill='%23ffffff' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -20,8 +22,8 @@ html { scroll-behavior: smooth; }
 body { background: var(--white); color: var(--text); font-family: 'Outfit', sans-serif; font-weight: 300; overflow-x: hidden; }
 
 /* ── PRIVACY ── */
-.privacy-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(10,18,40,.72); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 20px; transition: opacity .4s; }
-.privacy-overlay.hidden { opacity: 0; pointer-events: none; }
+.privacy-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(10,18,40,.72); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 20px; transition: opacity .4s, visibility .4s; }
+.privacy-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 .privacy-box { background: var(--white); border-radius: var(--radius-lg); max-width: 520px; width: 100%; padding: 48px 44px; box-shadow: var(--shadow-lg); }
 .privacy-logo { display: flex; align-items: center; justify-content: center; margin-bottom: 28px; }
 .privacy-logo img { height: 34px; }
@@ -31,7 +33,15 @@ body { background: var(--white); color: var(--text); font-family: 'Outfit', sans
 .privacy-btns button { flex: 1; padding: 14px; border-radius: 100px; font-family: 'Outfit', sans-serif; font-size: .9rem; font-weight: 500; cursor: pointer; border: none; transition: all .25s; }
 .btn-accept { background: linear-gradient(135deg, var(--blue), var(--blue-mid)); color: var(--white); }
 .btn-accept:hover { box-shadow: 0 6px 24px rgba(26,74,138,.35); transform: translateY(-1px); }
-.btn-decline { background: var(--light); color: var(--text-soft); }
+/* privacy info banner (non-blocking) */
+.privacy-banner { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 900; max-width: 760px; margin: 0 auto; background: var(--white); border: 1.5px solid var(--mid); border-radius: var(--radius); box-shadow: var(--shadow-lg); padding: 16px 20px; display: flex; align-items: center; gap: 18px; transition: opacity .3s, transform .3s, visibility .3s; }
+.privacy-banner.hidden { opacity: 0; visibility: hidden; transform: translateY(20px); pointer-events: none; }
+.pb-text { flex: 1; font-size: .84rem; color: var(--text-soft); line-height: 1.6; }
+.pb-text a { color: var(--blue); font-weight: 500; text-decoration: none; }
+.pb-text a:hover { text-decoration: underline; }
+.pb-btn { flex-shrink: 0; background: var(--blue); color: var(--white); border: none; padding: 10px 26px; border-radius: 100px; font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 500; cursor: pointer; transition: background .25s; }
+.pb-btn:hover { background: var(--blue-mid); }
+@media (max-width: 600px) { .privacy-banner { flex-direction: column; align-items: stretch; text-align: center; gap: 12px; } }
 
 /* ── NAV ── */
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 16px 5vw; display: flex; align-items: center; justify-content: space-between; transition: background .35s, box-shadow .35s; background: rgba(255,255,255,.96); backdrop-filter: blur(20px); box-shadow: var(--shadow-sm); }
@@ -56,8 +66,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 16px 5v
 .cat-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(135deg, #0d2040 0%, #1a4a8a 45%, #0a3060 100%); }
 .cat-hero-dots { position: absolute; inset: 0; z-index: 1; opacity: .06; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.8) 1px, transparent 0); background-size: 32px 32px; }
 .cat-hero-inner { position: relative; z-index: 2; max-width: 760px; }
-.cat-back { display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,.6); font-size: .8rem; letter-spacing: .04em; text-decoration: none; margin-bottom: 24px; transition: color .25s; }
-.cat-back:hover { color: var(--white); }
 .cat-eyebrow { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-light); font-weight: 500; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
 .cat-eyebrow::before { content: ''; width: 28px; height: 1.5px; background: var(--blue-light); }
 .cat-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem,5vw,4rem); font-weight: 400; line-height: 1.1; color: var(--white); margin-bottom: 18px; }
@@ -97,7 +105,6 @@ section.block { padding: 90px 5vw; }
 .eq-img { aspect-ratio: 1 / 1; background: var(--blue-ultra); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
 .eq-img::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 100%, rgba(45,107,191,.12), transparent 60%); }
 .eq-icon { font-size: 2.8rem; opacity: .25; }
-.eq-ph { position: absolute; bottom: 10px; right: 14px; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); opacity: .65; }
 .eq-tag { position: absolute; top: 14px; left: 14px; background: var(--blue); color: var(--white); font-size: .66rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; z-index: 2; }
 .eq-tag.teal { background: var(--teal); } .eq-tag.laser { background: #6b1a1a; } .eq-tag.micro { background: #8b1060; } .eq-tag.new { background: #c0392b; } .eq-tag.acc { background: #5b6580; } .eq-tag.analysis { background: #5a3fb5; } .eq-tag.both { background: linear-gradient(120deg, var(--teal), var(--blue-mid)); }
 .eq-body { padding: 22px 24px; display: flex; flex-direction: column; flex: 1; }
@@ -126,12 +133,11 @@ section.block { padding: 90px 5vw; }
 .dm-head { display: flex; gap: 18px; align-items: center; margin-bottom: 18px; padding-right: 30px; }
 .dm-icon { width: 84px; height: 84px; border-radius: var(--radius); background: var(--blue-ultra); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; flex-shrink: 0; }
 .dm-emoji { font-size: 2rem; opacity: .45; }
-.dm-icon .eq-tag { font-size: .6rem; padding: 3px 9px; }
 .dm-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text); line-height: 1.1; }
 .dm-type { font-size: .8rem; color: var(--blue-mid); font-weight: 500; margin-top: 5px; }
 .dm-desc { font-size: .9rem; color: var(--text-soft); line-height: 1.75; margin-bottom: 22px; }
 .dm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 20px; }
-.dm-block .dm-h { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--blue-mid); font-weight: 600; margin-bottom: 10px; }
+.dm-h { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--blue-mid); font-weight: 600; margin-bottom: 10px; }
 .dm-list { list-style: none; }
 .dm-list li { font-size: .84rem; color: var(--text-soft); padding: 5px 0 5px 18px; position: relative; line-height: 1.5; }
 .dm-list li::before { content: ''; position: absolute; left: 0; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue-light); }
@@ -167,10 +173,10 @@ section.block { padding: 90px 5vw; }
 .form-sub { font-size: .85rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.65; }
 .form-group { margin-bottom: 16px; }
 .form-group label { display: block; font-size: .75rem; letter-spacing: .08em; color: var(--text-muted); font-weight: 500; text-transform: uppercase; margin-bottom: 7px; }
-.form-group input, .form-group textarea, .form-group select { width: 100%; background: var(--off-white); border: 1.5px solid var(--mid); border-radius: 12px; padding: 13px 16px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: .9rem; font-weight: 300; transition: border-color .3s, box-shadow .3s; outline: none; appearance: none; }
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--blue-mid); box-shadow: 0 0 0 3px rgba(45,107,191,.1); background: var(--white); }
+.form-group input, .form-group textarea, .form-group select { width: 100%; background-color: var(--off-white); border: 1.5px solid var(--mid); border-radius: 12px; padding: 13px 16px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: .9rem; font-weight: 300; transition: border-color .3s, box-shadow .3s; outline: none; appearance: none; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--blue-mid); box-shadow: 0 0 0 3px rgba(45,107,191,.1); background-color: var(--white); }
 .form-group textarea { height: 100px; resize: none; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group select { cursor: pointer; padding-right: 44px; background-repeat: no-repeat; background-position: right 16px center; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%232d6bbf' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 .btn-whatsapp { width: 100%; padding: 15px; border-radius: 100px; background: #25d366; color: var(--white); border: none; font-family: 'Outfit', sans-serif; font-size: .95rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background .3s, box-shadow .3s, transform .2s; margin-top: 8px; }
 .btn-whatsapp:hover { background: #1ebe5b; box-shadow: 0 8px 24px rgba(37,211,102,.3); transform: translateY(-2px); }
 
@@ -195,7 +201,6 @@ nav .burger span { background: var(--text); }
 .mobile-menu a.m-active { color: var(--blue); font-weight: 500; }
 .mobile-menu a.m-cta { margin-top: 18px; border: none; background: var(--blue); color: var(--white); text-align: center; border-radius: 100px; font-weight: 500; }
 @media (max-width: 768px) { .burger { display: flex; } }
-.seminar-badge.mc { background: var(--teal); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1100px) { .trust-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -207,7 +212,6 @@ nav .burger span { background: var(--text); }
   .nav-links { display: none; }
   .cat-grid { grid-template-columns: 1fr; }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
-  .form-row { grid-template-columns: 1fr; }
   .privacy-box { padding: 36px 28px; } .privacy-btns { flex-direction: column; }
   .cat-hero-meta { gap: 28px; }
 }
@@ -215,23 +219,25 @@ nav .burger span { background: var(--text); }
 </head>
 <body>
 
-<!-- PRIVACY MODAL -->
-<div class="privacy-overlay" id="privacyOverlay">
-  <div class="privacy-box">
+<!-- PRIVACY POLICY (opens from banner / footer) -->
+<div class="privacy-overlay hidden" id="privacyOverlay" onclick="if(event.target===this)closePrivacy()">
+  <div class="privacy-box" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
     <div class="privacy-logo">
       <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/Zemits_Logo_s_b.svg" alt="Zemits Skin Expert"
            onerror="this.outerHTML='<span style=\'font-family:Playfair Display,serif;font-size:1.2rem;color:#1a2340;font-weight:600\'>ZEMITS SKIN EXPERT</span>'">
     </div>
-    <div class="privacy-title" data-i18n="privacy_title">Privātuma politika</div>
-    <div class="privacy-body" data-i18n="privacy_body">
-      Šī tīmekļa vietne izmanto tikai tehniski nepieciešamās funkcijas saziņai vietnē WhatsApp. Mēs <strong>neizmantojam</strong> trešo pušu analītiku un nenododam jūsu datus trešajām personām.<br><br>
-      Iesniedzot pieteikumu, jūs piekrītat, ka jūsu kontaktinformācija tiks izmantota tikai saziņai ar «Zemits Skin Expert» speciālistiem.
-    </div>
+    <div class="privacy-title" id="privacyTitle" data-i18n="privacy_title">Privātuma politika</div>
+    <div class="privacy-body" data-i18n="privacy_body"></div>
     <div class="privacy-btns">
-      <button class="btn-accept" onclick="acceptPrivacy()" data-i18n="privacy_accept">Piekrītu un turpinu</button>
-      <button class="btn-decline" onclick="declinePrivacy()" data-i18n="privacy_decline">Nepiekrītu</button>
+      <button class="btn-accept" onclick="closePrivacy()" data-i18n="privacy_close">Aizvērt</button>
     </div>
   </div>
+</div>
+
+<!-- PRIVACY INFO BANNER -->
+<div class="privacy-banner hidden" id="privacyBanner" role="region" aria-label="Privacy">
+  <div class="pb-text" data-i18n="banner_text"></div>
+  <button class="pb-btn" onclick="ackBanner()" data-i18n="banner_ok">Sapratu</button>
 </div>
 
 <!-- NAV -->
@@ -273,7 +279,7 @@ nav .burger span { background: var(--text); }
     <div class="cat-hero-meta">
       <div class="cat-hero-stat"><div class="n" id="deviceCount">—</div><div class="l" data-i18n="meta_devices">Iekārtas klāstā</div></div>
       <div class="cat-hero-stat"><div class="n">24</div><div class="l" data-i18n="meta_warranty">Mēneši garantija</div></div>
-      <div class="cat-hero-stat"><div class="n"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/ce%20sertificatiaon.png" alt="CE" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)"></div><div class="l" data-i18n="meta_cert">Sertifikācija</div></div>
+      <div class="cat-hero-stat"><div class="n"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/ce%20sertificatiaon.png?tr=h-80" alt="CE" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)"></div><div class="l" data-i18n="meta_cert">Sertifikācija</div></div>
     </div>
   </div>
 </section>
@@ -283,12 +289,12 @@ nav .burger span { background: var(--text); }
   <div class="section-eyebrow reveal" data-i18n="trust_eyebrow">Iegādājoties Zemits</div>
   <h2 class="section-title reveal reveal-delay-1" data-i18n="trust_title">Jūs saņemat <em>visu nepieciešamo</em></h2>
   <div class="trust-grid">
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/5.png" alt=""><div class="trust-label" data-i18n="trust1">Apmācības</div><div class="trust-mini" data-i18n="trust1_mini">Profesionālas apmācības katrai iekārtai</div></div>
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/6.png" alt=""><div class="trust-label" data-i18n="trust2">24 mēneši garantija</div><div class="trust-mini" data-i18n="trust2_mini">Pilna garantija visām iekārtām</div></div>
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/7.png" alt=""><div class="trust-label" data-i18n="trust3">Atbalsts</div><div class="trust-mini" data-i18n="trust3_mini">Konsultācijas un ieteikumi iegādes un lietošanas procesā</div></div>
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/8.png" alt=""><div class="trust-label" data-i18n="trust4">Serviss</div><div class="trust-mini" data-i18n="trust4_mini">Tehniskais serviss Latvijā</div></div>
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/9.png" alt=""><div class="trust-label" data-i18n="trust5">Instrukcija latviešu valodā</div><div class="trust-mini" data-i18n="trust5_mini">Pilna dokumentācija latviešu valodā</div></div>
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/10.png" alt=""><div class="trust-label" data-i18n="trust6">CE Sertifikāts</div><div class="trust-mini" data-i18n="trust6_mini">Atbilstība Eiropas kvalitātes standartiem</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/5.png?tr=w-160" alt=""><div class="trust-label" data-i18n="trust1">Apmācības</div><div class="trust-mini" data-i18n="trust1_mini">Profesionālas apmācības katrai iekārtai</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/6.png?tr=w-160" alt=""><div class="trust-label" data-i18n="trust2">24 mēneši garantija</div><div class="trust-mini" data-i18n="trust2_mini">Pilna garantija visām iekārtām</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/7.png?tr=w-160" alt=""><div class="trust-label" data-i18n="trust3">Atbalsts</div><div class="trust-mini" data-i18n="trust3_mini">Konsultācijas un ieteikumi iegādes un lietošanas procesā</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/8.png?tr=w-160" alt=""><div class="trust-label" data-i18n="trust4">Serviss</div><div class="trust-mini" data-i18n="trust4_mini">Tehniskais serviss Latvijā</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/9.png?tr=w-160" alt=""><div class="trust-label" data-i18n="trust5">Instrukcija latviešu valodā</div><div class="trust-mini" data-i18n="trust5_mini">Pilna dokumentācija latviešu valodā</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/10.png?tr=w-160" alt=""><div class="trust-label" data-i18n="trust6">CE Sertifikāts</div><div class="trust-mini" data-i18n="trust6_mini">Atbilstība Eiropas kvalitātes standartiem</div></div>
   </div>
 </section>
 
@@ -313,7 +319,7 @@ nav .burger span { background: var(--text); }
       <p class="section-sub reveal reveal-delay-1" style="margin-bottom:36px;" data-i18n="con_desc">Atstājiet pieteikumu, un mēs sagatavosim cenas piedāvājumu izvēlētajai iekārtai, atbildēsim uz jautājumiem vai palīdzēsim izvēlēties piemērotāko risinājumu jūsu salonam.</p>
       <div class="contact-item reveal reveal-delay-1"><div class="contact-icon">📞</div><div><div class="contact-label" data-i18n="con_phone_lbl">Telefons</div><div class="contact-value"><a href="tel:+37126767517">+371 26767517</a></div></div></div>
       <div class="contact-item reveal reveal-delay-1"><div class="contact-icon">📍</div><div><div class="contact-label" data-i18n="con_addr_lbl">Adrese</div><div class="contact-value" data-i18n="con_addr">Vienības gatve 192, Rīga, Latvija</div></div></div>
-      <div class="contact-item reveal reveal-delay-2"><div class="contact-icon">📸</div><div><div class="contact-label">Instagram</div><div class="contact-value"><a href="https://instagram.com/zemits_skin_expert" target="_blank">@zemits_skin_expert</a></div></div></div>
+      <div class="contact-item reveal reveal-delay-2"><div class="contact-icon">📸</div><div><div class="contact-label">Instagram</div><div class="contact-value"><a href="https://www.instagram.com/zemits.latvija_official" target="_blank" rel="noopener">@zemits.latvija_official</a></div></div></div>
     </div>
     <div class="wa-form reveal reveal-delay-2">
       <div class="wa-form-header">
@@ -339,8 +345,8 @@ nav .burger span { background: var(--text); }
   <div class="footer-copy">© 2026 Zemits Skin Expert.</div>
   <div class="footer-links">
     <a href="index.html" data-i18n="footer_home">Sākums</a>
-    <a href="#" onclick="document.getElementById('privacyOverlay').classList.remove('hidden');return false;" data-i18n="footer_privacy">Privātuma politika</a>
-    <a href="https://instagram.com/zemits_skin_expert" target="_blank">@zemits_skin_expert</a>
+    <a href="#" onclick="openPrivacy();return false;" data-i18n="footer_privacy">Privātuma politika</a>
+    <a href="https://www.instagram.com/zemits.latvija_official" target="_blank" rel="noopener">@zemits.latvija_official</a>
   </div>
 </footer>
 
@@ -356,14 +362,14 @@ nav .burger span { background: var(--text); }
 /* ───────── STATIC CHROME TRANSLATIONS ───────── */
 const i18n = {
   lv: {
-    privacy_title:'Privātuma politika', privacy_accept:'Piekrītu un turpinu', privacy_decline:'Nepiekrītu',
+    privacy_title:'Privātuma politika', privacy_close:'Aizvērt', banner_ok:'Sapratu',
+    banner_text:'Mēs neizmantojam trešo pušu analītiku un izsekošanas sīkdatnes — jūsu pārlūkā tiek saglabāti tikai vietnes iestatījumi (piem., valoda). <a href="#" onclick="openPrivacy();return false;">Privātuma politika</a>',
     privacy_body:'Šī tīmekļa vietne izmanto tikai tehniski nepieciešamās funkcijas saziņai vietnē WhatsApp. Mēs <strong>neizmantojam</strong> trešo pušu analītiku un nenododam jūsu datus trešajām personām.<br><br>Iesniedzot pieteikumu, jūs piekrītat, ka jūsu kontaktinformācija tiks izmantota tikai saziņai ar «Zemits Skin Expert» speciālistiem.',
-    nav_home:'Sākumlapa', nav_about:'Par mums', nav_equipment:'Iekārtas', nav_seminars:'Semināri', nav_reviews:'Atsauksmes', nav_contact:'Sazināties',
-    back_home:'← Atpakaļ uz sākumu',
+    nav_home:'Sākumlapa', nav_equipment:'Iekārtas', nav_contact:'Sazināties',
     cat_eyebrow:'Aparātu katalogs 2026', cat_title:'iekārtu klāsts',
     cat_sub:'Profesionālas estētiskās kosmetoloģijas iekārtas sejas un ķermeņa procedūrām. Katra iekārta tiek piegādāta ar apmācībām, garantiju un tehnisko atbalstu.',
     meta_devices:'Iekārtas klāstā', meta_warranty:'Mēneši garantija', meta_cert:'Sertifikācija',
-    trust_eyebrow:'Iegādājoties Zemits', trust_title:'Jūs saņemat visu nepieciešamo',
+    trust_eyebrow:'Iegādājoties Zemits', trust_title:'Jūs saņemat <em>visu nepieciešamo</em>',
     trust1:'Apmācības', trust2:'24 mēneši garantija', trust3:'Atbalsts', trust4:'Serviss', trust5:'Instrukcija latviešu valodā', trust6:'CE Sertifikāts',
     trust1_mini:'Profesionālas apmācības katrai iekārtai', trust2_mini:'Pilna garantija visām iekārtām', trust3_mini:'Konsultācijas un ieteikumi iegādes un lietošanas procesā', trust4_mini:'Tehniskais serviss Latvijā', trust5_mini:'Pilna dokumentācija latviešu valodā', trust6_mini:'Atbilstība Eiropas kvalitātes standartiem',
     eq_eyebrow:'Iekārtas', eq_title:'iekārtas un cenas',
@@ -372,8 +378,7 @@ const i18n = {
     con_desc:'Atstājiet pieteikumu, un mēs sagatavosim cenas piedāvājumu izvēlētajai iekārtai, atbildēsim uz jautājumiem vai palīdzēsim izvēlēties piemērotāko risinājumu jūsu salonam.',
     con_phone_lbl:'Telefons', con_addr_lbl:'Adrese', con_addr:'Vienības gatve 192, Rīga, Latvija',
     form_title:'Rakstīt mums WhatsApp', form_sub:'Aizpildiet formu — mēs sagatavosim jūsu ziņojumu un atvērsim WhatsApp, lai sazinātos ar jums ātrāk.',
-    form_name:'Vārds', form_name_ph:'Jūsu vārds', form_phone:'Telefons', form_subject:'Jautājums / Interese', form_subject_ph:'Izvēlieties tēmu…', form_device:'Iekārta, kas interesē', form_device_ph:'Izvēlieties aparātu…',
-    form_opt1:'Aparātu iegāde', form_opt3:'Konsultācija par aparātu izvēli', form_opt4:'Apmācības un kursi', form_opt6:'Serviss un garantija', form_opt5:'Cits jautājums',
+    form_device:'Iekārta, kas interesē', form_device_ph:'Izvēlieties aparātu…',
     form_msg:'Ziņojums', form_msg_ph:'Jūsu jautājums vai komentārs…', form_send:'Atvērt WhatsApp',
     footer_home:'Sākums', footer_privacy:'Privātuma politika',
     /* device UI */
@@ -383,17 +388,17 @@ const i18n = {
     ui_interest:'Mani interesē iekārta:',
     /* tags */
     tag_face:'Seja', tag_body:'Ķermenis', tag_laser:'Lāzers', tag_new:'Jaunums', tag_acc:'Aksesuāri', tag_analysis:'Ādas analīze', tag_needle:'Mikroadatas', tag_both:'Seja/ķermenis',
-    wa_greeting:'Sveiki, Zemits Skin Expert!', wa_name:'Mani sauc', wa_phone:'Telefons', wa_topic:'Tēma', wa_device:'Interesē aparāts', wa_msg:'Ziņojums', wa_thanks:'Paldies!'
+    wa_greeting:'Sveiki, Zemits Skin Expert!', wa_device:'Interesē aparāts', wa_thanks:'Paldies!'
   },
   ru: {
-    privacy_title:'Политика конфиденциальности', privacy_accept:'Принимаю и продолжаю', privacy_decline:'Не принимаю',
+    privacy_title:'Политика конфиденциальности', privacy_close:'Закрыть', banner_ok:'Понятно',
+    banner_text:'Мы не используем стороннюю аналитику и отслеживающие cookie — в вашем браузере сохраняются только настройки сайта (например, язык). <a href="#" onclick="openPrivacy();return false;">Политика конфиденциальности</a>',
     privacy_body:'Этот сайт использует только технически необходимые функции для связи через WhatsApp. Мы <strong>не используем</strong> сторонние системы аналитики и не передаём ваши данные третьим лицам.<br><br>Отправляя заявку, вы соглашаетесь на использование ваших контактных данных исключительно для связи со специалистами Zemits Skin Expert.',
-    nav_home:'Главная', nav_about:'О нас', nav_equipment:'Аппараты', nav_seminars:'Семинары', nav_reviews:'Отзывы', nav_contact:'Связаться',
-    back_home:'← Назад на главную',
+    nav_home:'Главная', nav_equipment:'Аппараты', nav_contact:'Связаться',
     cat_eyebrow:'Каталог оборудования 2026', cat_title:'ассортимент аппаратов',
     cat_sub:'Профессиональное эстетическое косметологическое оборудование для процедур лица и тела. Каждый аппарат поставляется с обучением, гарантией и технической поддержкой.',
     meta_devices:'Аппаратов в каталоге', meta_warranty:'Месяца гарантии', meta_cert:'Сертификация',
-    trust_eyebrow:'При покупке Zemits', trust_title:'Вы получаете всё необходимое',
+    trust_eyebrow:'При покупке Zemits', trust_title:'Вы получаете <em>всё необходимое</em>',
     trust1:'Обучение', trust2:'Гарантия 24 месяца', trust3:'Поддержка', trust4:'Сервис', trust5:'Инструкция на латышском языке', trust6:'CE Сертификат',
     trust1_mini:'Профессиональное обучение по каждому аппарату', trust2_mini:'Полная гарантия на всё оборудование', trust3_mini:'Консультации и рекомендации при покупке и в процессе использования', trust4_mini:'Технический сервис в Латвии', trust5_mini:'Полная документация на латышском языке', trust6_mini:'Соответствие европейским стандартам качества',
     eq_eyebrow:'Оборудование', eq_title:'аппараты и цены',
@@ -402,8 +407,7 @@ const i18n = {
     con_desc:'Оставьте заявку — мы подготовим ценовое предложение по выбранному аппарату, ответим на вопросы или поможем подобрать оптимальное решение для вашего салона.',
     con_phone_lbl:'Телефон', con_addr_lbl:'Адрес', con_addr:'Vienības gatve 192, Рига, Латвия',
     form_title:'Написать нам в WhatsApp', form_sub:'Заполните форму — мы подготовим ваше сообщение и откроем WhatsApp для быстрой связи.',
-    form_name:'Имя', form_name_ph:'Ваше имя', form_phone:'Телефон', form_subject:'Вопрос / Интерес', form_subject_ph:'Выберите тему…', form_device:'Интересующий аппарат', form_device_ph:'Выберите аппарат…',
-    form_opt1:'Покупка оборудования', form_opt3:'Консультация по выбору аппарата', form_opt4:'Обучение и курсы', form_opt6:'Сервис и гарантия', form_opt5:'Другой вопрос',
+    form_device:'Интересующий аппарат', form_device_ph:'Выберите аппарат…',
     form_msg:'Сообщение', form_msg_ph:'Ваш вопрос или комментарий…', form_send:'Открыть WhatsApp',
     footer_home:'Главная', footer_privacy:'Политика конфиденциальности',
     ui_request:'Запросить цену', ui_onrequest:'Цена по запросу', ui_more:'+ ещё {n} функций',
@@ -411,17 +415,17 @@ const i18n = {
     inc_train:'Обучение', inc_warranty:'Гарантия 24 месяца', inc_support:'Техническая поддержка', inc_manual:'Инструкция на латышском языке', inc_ce:'Сертификат CE', m_sizes:'Доступные размеры', ui_from:'от',
     ui_interest:'Меня интересует аппарат:',
     tag_face:'Лицо', tag_body:'Тело', tag_laser:'Лазер', tag_new:'Новинка', tag_acc:'Аксессуары', tag_analysis:'Анализ кожи', tag_needle:'Микроиглы', tag_both:'Лицо/тело',
-    wa_greeting:'Здравствуйте, Zemits Skin Expert!', wa_name:'Меня зовут', wa_phone:'Телефон', wa_topic:'Тема', wa_device:'Интересующий аппарат', wa_msg:'Сообщение', wa_thanks:'Спасибо!'
+    wa_greeting:'Здравствуйте, Zemits Skin Expert!', wa_device:'Интересующий аппарат', wa_thanks:'Спасибо!'
   },
   en: {
-    privacy_title:'Privacy Policy', privacy_accept:'Accept & Continue', privacy_decline:'Decline',
+    privacy_title:'Privacy Policy', privacy_close:'Close', banner_ok:'Got it',
+    banner_text:'We use no third-party analytics or tracking cookies — your browser only stores site settings (such as language). <a href="#" onclick="openPrivacy();return false;">Privacy Policy</a>',
     privacy_body:'This website uses only technically necessary functions for communication via WhatsApp. We do <strong>not use</strong> third-party analytics and do not share your data with third parties.<br><br>By submitting a request, you agree that your contact details will be used solely for communication with Zemits Skin Expert specialists.',
-    nav_home:'Home', nav_about:'About us', nav_equipment:'Devices', nav_seminars:'Seminars', nav_reviews:'Reviews', nav_contact:'Contact us',
-    back_home:'← Back to home',
+    nav_home:'Home', nav_equipment:'Devices', nav_contact:'Contact us',
     cat_eyebrow:'Equipment catalogue 2026', cat_title:'device range',
     cat_sub:'Professional aesthetic cosmetology equipment for facial and body treatments. Every device comes with training, warranty, and technical support.',
     meta_devices:'Devices in range', meta_warranty:'Months warranty', meta_cert:'Certification',
-    trust_eyebrow:'When you purchase Zemits', trust_title:'You receive everything you need',
+    trust_eyebrow:'When you purchase Zemits', trust_title:'You receive <em>everything you need</em>',
     trust1:'Training', trust2:'24-month warranty', trust3:'Support', trust4:'Service', trust5:'Manual in Latvian', trust6:'CE Certificate',
     trust1_mini:'Professional training for every device', trust2_mini:'Full warranty on all equipment', trust3_mini:'Consultations and guidance during purchase and use', trust4_mini:'Technical service in Latvia', trust5_mini:'Full documentation in Latvian', trust6_mini:'Compliance with European quality standards',
     eq_eyebrow:'Equipment', eq_title:'devices & pricing',
@@ -430,8 +434,6 @@ const i18n = {
     con_desc:'Leave a request and we will prepare a price quote for the selected device, answer your questions, or help you choose the best solution for your salon.',
     con_phone_lbl:'Phone', con_addr_lbl:'Address', con_addr:'Vienības gatve 192, Riga, Latvia',
     form_title:'Message us on WhatsApp', form_sub:'Fill in the form — we will prepare your message and open WhatsApp for a quick response.',
-    form_name:'Name', form_name_ph:'Your name', form_phone:'Phone', form_subject:'Question / Interest', form_subject_ph:'Select a topic…',
-    form_opt1:'Equipment purchase', form_opt3:'Device selection consultation', form_opt4:'Training & courses', form_opt6:'Service & warranty', form_opt5:'Other enquiry',
     form_msg:'Message', form_msg_ph:'Your question or comment…', form_send:'Open WhatsApp',
     footer_home:'Home', footer_privacy:'Privacy Policy',
     ui_request:'Request price', ui_onrequest:'Price on request', ui_more:'+ {n} more functions',
@@ -439,7 +441,7 @@ const i18n = {
     inc_train:'Training', inc_warranty:'24-month warranty', inc_support:'Technical support', inc_manual:'Manual in Latvian', inc_ce:'CE certificate', m_sizes:'Available sizes', ui_from:'from',
     ui_interest:'I am interested in:',
     form_device:'Device of interest', form_device_ph:'Select a device…',
-    wa_greeting:'Hello, Zemits Skin Expert!', wa_device:'Device of interest', wa_msg:'Message', wa_thanks:'Thank you!',
+    wa_greeting:'Hello, Zemits Skin Expert!', wa_device:'Device of interest', wa_thanks:'Thank you!',
     tag_face:'Face', tag_body:'Body', tag_laser:'Laser', tag_new:'New', tag_acc:'Accessories', tag_analysis:'Skin analysis', tag_needle:'Microneedling', tag_both:'Face/body'
   }
 };
@@ -700,11 +702,11 @@ const deviceInfo = {
         treats:['Aging and skin laxity','Clogged pores and comedones','Dehydration and dull skin','Uneven tone']}
   },
   'Zemits Celluspice Pro': {
-    lv:{desc:'Vakuuma–termomasāžas aparāts ķermenim, kas apvieno vakuuma masāžu ar siltuma iedarbību, lai uzlabotu mikrocirkulāciju, limfas aizplūšanu un ādas tonusu.',
+    lv:{desc:'Vakuuma–termomasāžas aparāts sejai un ķermenim, kas apvieno vakuuma masāžu ar siltuma iedarbību, lai uzlabotu mikrocirkulāciju, limfas aizplūšanu un ādas tonusu.',
         treats:['Celulīts un ķermeņa kontūras','Limfodrenāža un pietūkums','Ādas elastība','Atslābinoša ķermeņa masāža']},
-    ru:{desc:'Вакуумно-термомассажный аппарат для тела: сочетает вакуумный массаж с тепловым воздействием для микроциркуляции, лимфооттока и тонуса кожи.',
+    ru:{desc:'Вакуумно-термомассажный аппарат для лица и тела: сочетает вакуумный массаж с тепловым воздействием для микроциркуляции, лимфооттока и тонуса кожи.',
         treats:['Целлюлит и контуры тела','Лимфодренаж и отёчность','Эластичность кожи','Расслабляющий массаж тела']},
-    en:{desc:'Vacuum thermo-massage device for the body combining vacuum massage with heat to improve microcirculation, lymphatic drainage, and skin tone.',
+    en:{desc:'Vacuum thermo-massage device for face and body, combining vacuum massage with heat to improve microcirculation, lymphatic drainage, and skin tone.',
         treats:['Cellulite and body contours','Lymphatic drainage and puffiness','Skin elasticity','Relaxing body massage']}
   },
   'Zemits Evoplasma': {
@@ -772,11 +774,11 @@ const deviceInfo = {
         treats:['Body shape correction','Buttock modeling','Cellulite','Microcirculation and skin tone']}
   },
   'Zemits Vivalumix': {
-    lv:{desc:'LED gaismas terapijas panelis ar zilo, sarkano un infrasarkano gaismu dažādu ādas stāvokļu atbalstam — bezkontakta un relaksējoša procedūra.',
+    lv:{desc:'LED gaismas terapijas panelis ar 7 gaismas krāsām — zilo, sarkano, infrasarkano, zaļo, dzelteno, ciāna un violeto — dažādu ādas stāvokļu atbalstam. Bezkontakta un relaksējoša procedūra.',
         treats:['Zilā gaisma: problemātiska, akne nosliece āda','Sarkanā gaisma: novecošanās un atjaunošana','Infrasarkanā: dziļa atjaunošanās','Papildprocedūra citiem protokoliem']},
-    ru:{desc:'Панель LED-светотерапии с синим, красным и инфракрасным светом для поддержки разных состояний кожи — бесконтактная и расслабляющая процедура.',
+    ru:{desc:'Панель LED-светотерапии с 7 цветами света — синим, красным, инфракрасным, зелёным, жёлтым, циановым и фиолетовым — для поддержки разных состояний кожи. Бесконтактная и расслабляющая процедура.',
         treats:['Синий свет: проблемная, склонная к акне кожа','Красный свет: старение и восстановление','Инфракрасный: глубокое восстановление','Дополнение к другим протоколам']},
-    en:{desc:'LED light-therapy panel with blue, red, and infrared light to support various skin conditions — a contactless, relaxing treatment.',
+    en:{desc:'LED light-therapy panel with 7 light colours — blue, red, infrared, green, yellow, cyan and violet — to support various skin conditions. A contactless, relaxing treatment.',
         treats:['Blue light: problematic, acne-prone skin','Red light: aging and recovery','Infrared: deep regeneration','Add-on to other protocols']}
   },
   'Zemits PrimeCart': {
@@ -816,6 +818,8 @@ const deviceImg = {
   'Zemits Celltite':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/25.png',
   'Zemits PrimeCart':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/22.png'
 };
+/* serve resized photos via ImageKit (cards ≈400px wide → 800px for retina) */
+Object.keys(deviceImg).forEach(k => { deviceImg[k] += '?tr=w-800'; });
 
 let currentLang = 'lv';
 const FEAT_CAP = 6;
@@ -968,10 +972,18 @@ function populateDeviceSelect(){
   });
 }
 
-/* ── PRIVACY ── */
-function acceptPrivacy(){ document.getElementById('privacyOverlay').classList.add('hidden'); sessionStorage.setItem('privacyAccepted','1'); }
-function declinePrivacy(){ document.getElementById('privacyOverlay').classList.add('hidden'); document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:Outfit,sans-serif;text-align:center;padding:40px"><div><div style="font-size:2rem;margin-bottom:16px">🔒</div><h2 style="color:#1a2340;margin-bottom:12px">'+{lv:'Piekļuve ierobežota',ru:'Доступ ограничен',en:'Access restricted'}[currentLang]+'</h2><p style="color:#4a5470;line-height:1.7"><a href="javascript:location.reload()" style="color:#1a4a8a">'+{lv:'Mēģināt vēlreiz',ru:'Попробовать снова',en:'Try again'}[currentLang]+'</a></p></div></div>'; }
-if(sessionStorage.getItem('privacyAccepted')) document.getElementById('privacyOverlay').classList.add('hidden');
+/* ── PRIVACY: non-blocking info banner + policy modal ── */
+function openPrivacy(){ document.getElementById('privacyOverlay').classList.remove('hidden'); }
+function closePrivacy(){ document.getElementById('privacyOverlay').classList.add('hidden'); }
+function ackBanner(){
+  document.getElementById('privacyBanner').classList.add('hidden');
+  try { localStorage.setItem('zemitsPrivacyAck', '1'); } catch(e) {}
+}
+(function(){
+  let ack = null; try { ack = localStorage.getItem('zemitsPrivacyAck'); } catch(e) {}
+  if (!ack) document.getElementById('privacyBanner').classList.remove('hidden');
+})();
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePrivacy(); });
 
 /* ── REVEAL ── */
 const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }), {threshold:.1});
