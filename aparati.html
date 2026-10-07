@@ -181,6 +181,22 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
 .footer-links a { font-size: .8rem; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: var(--white); }
 
+/* ── MOBILE MENU ── */
+.burger { display: none; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.12); cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 0; transition: background .3s, border-color .3s; }
+.burger span { display: block; width: 18px; height: 2px; background: #fff; border-radius: 2px; transition: transform .3s, opacity .3s, background .3s; }
+nav .burger { background: var(--light); border-color: var(--mid); }
+nav .burger span { background: var(--text); }
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { position: fixed; top: 0; left: 0; right: 0; z-index: 190; background: var(--white); padding: 88px 5vw 28px; box-shadow: var(--shadow-md); transform: translateY(-110%); transition: transform .35s ease; display: flex; flex-direction: column; visibility: hidden; }
+.mobile-menu.open { transform: none; visibility: visible; }
+.mobile-menu a { padding: 15px 4px; border-bottom: 1px solid var(--light); color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 400; }
+.mobile-menu a.m-active { color: var(--blue); font-weight: 500; }
+.mobile-menu a.m-cta { margin-top: 18px; border: none; background: var(--blue); color: var(--white); text-align: center; border-radius: 100px; font-weight: 500; }
+@media (max-width: 768px) { .burger { display: flex; } }
+.seminar-badge.mc { background: var(--teal); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1100px) { .trust-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 1024px) {
@@ -235,8 +251,17 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
       <button class="lang-btn" onclick="setLang('ru')">RU</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" data-i18n="nav_home">Sākumlapa</a>
+  <a href="aparati.html" class="m-active" onclick="toggleMenu(false)" data-i18n="nav_equipment">Iekārtas</a>
+  <a href="#contacts" class="m-cta" onclick="toggleMenu(false)" data-i18n="nav_contact">Sazināties</a>
+</div>
+
 
 <!-- CATALOG HERO -->
 <section id="cat-hero">
@@ -259,10 +284,10 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
   <h2 class="section-title reveal reveal-delay-1" data-i18n="trust_title">Jūs saņemat <em>visu nepieciešamo</em></h2>
   <div class="trust-grid">
     <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/5.png" alt=""><div class="trust-label" data-i18n="trust1">Apmācības</div><div class="trust-mini" data-i18n="trust1_mini">Profesionālas apmācības katrai iekārtai</div></div>
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/6.png" alt=""><div class="trust-label" data-i18n="trust2">24 mēneši garantija</div><div class="trust-mini" data-i18n="trust2_mini">Pilna garantija visiem aparātiem</div></div>
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/7.png" alt=""><div class="trust-label" data-i18n="trust3">Atbalsts</div><div class="trust-mini" data-i18n="trust3_mini">Konsultācijas un palīdzība jebkurā laikā</div></div>
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/8.png" alt=""><div class="trust-label" data-i18n="trust4">Serviss</div><div class="trust-mini" data-i18n="trust4_mini">Tehniskais serviss un rezerves daļas</div></div>
-    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/9.png" alt=""><div class="trust-label" data-i18n="trust5">Instrukcija latviešu valodā</div><div class="trust-mini" data-i18n="trust5_mini">Pilna dokumentācija dzimtajā valodā</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/6.png" alt=""><div class="trust-label" data-i18n="trust2">24 mēneši garantija</div><div class="trust-mini" data-i18n="trust2_mini">Pilna garantija visām iekārtām</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/7.png" alt=""><div class="trust-label" data-i18n="trust3">Atbalsts</div><div class="trust-mini" data-i18n="trust3_mini">Konsultācijas un ieteikumi iegādes un lietošanas procesā</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/8.png" alt=""><div class="trust-label" data-i18n="trust4">Serviss</div><div class="trust-mini" data-i18n="trust4_mini">Tehniskais serviss Latvijā</div></div>
+    <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/9.png" alt=""><div class="trust-label" data-i18n="trust5">Instrukcija latviešu valodā</div><div class="trust-mini" data-i18n="trust5_mini">Pilna dokumentācija latviešu valodā</div></div>
     <div class="trust-item reveal"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/10.png" alt=""><div class="trust-label" data-i18n="trust6">CE Sertifikāts</div><div class="trust-mini" data-i18n="trust6_mini">Atbilstība Eiropas kvalitātes standartiem</div></div>
   </div>
 </section>
@@ -340,9 +365,9 @@ const i18n = {
     meta_devices:'Iekārtas klāstā', meta_warranty:'Mēneši garantija', meta_cert:'Sertifikācija',
     trust_eyebrow:'Iegādājoties Zemits', trust_title:'Jūs saņemat visu nepieciešamo',
     trust1:'Apmācības', trust2:'24 mēneši garantija', trust3:'Atbalsts', trust4:'Serviss', trust5:'Instrukcija latviešu valodā', trust6:'CE Sertifikāts',
-    trust1_mini:'Profesionālas apmācības katrai iekārtai', trust2_mini:'Pilna garantija visiem aparātiem', trust3_mini:'Konsultācijas un palīdzība jebkurā laikā', trust4_mini:'Tehniskais serviss un rezerves daļas', trust5_mini:'Pilna dokumentācija dzimtajā valodā', trust6_mini:'Atbilstība Eiropas kvalitātes standartiem',
+    trust1_mini:'Profesionālas apmācības katrai iekārtai', trust2_mini:'Pilna garantija visām iekārtām', trust3_mini:'Konsultācijas un ieteikumi iegādes un lietošanas procesā', trust4_mini:'Tehniskais serviss Latvijā', trust5_mini:'Pilna dokumentācija latviešu valodā', trust6_mini:'Atbilstība Eiropas kvalitātes standartiem',
     eq_eyebrow:'Iekārtas', eq_title:'iekārtas un cenas',
-    cat_pricenote:'Norādītās cenas ir orientējošas (EUR, ar PVN). Precīzu piedāvājumu, komplektāciju un piegādes nosacījumus sagatavosim individuāli. Iekārtu fotogrāfijas tiks pievienotas drīzumā.',
+    cat_pricenote:'Norādītās cenas ir orientējošas (EUR, ar PVN). Precīzu piedāvājumu, komplektāciju un piegādes nosacījumus sagatavosim individuāli.',
     con_eyebrow:'Pieteikums', con_title:'Pieprasīt piedāvājumu',
     con_desc:'Atstājiet pieteikumu, un mēs sagatavosim cenas piedāvājumu izvēlētajai iekārtai, atbildēsim uz jautājumiem vai palīdzēsim izvēlēties piemērotāko risinājumu jūsu salonam.',
     con_phone_lbl:'Telefons', con_addr_lbl:'Adrese', con_addr:'Vienības gatve 192, Rīga, Latvija',
@@ -370,7 +395,7 @@ const i18n = {
     meta_devices:'Аппаратов в каталоге', meta_warranty:'Месяца гарантии', meta_cert:'Сертификация',
     trust_eyebrow:'При покупке Zemits', trust_title:'Вы получаете всё необходимое',
     trust1:'Обучение', trust2:'Гарантия 24 месяца', trust3:'Поддержка', trust4:'Сервис', trust5:'Инструкция на латышском языке', trust6:'CE Сертификат',
-    trust1_mini:'Профессиональное обучение по каждому аппарату', trust2_mini:'Полная гарантия на всё оборудование', trust3_mini:'Консультации и помощь в любое время', trust4_mini:'Технический сервис и запасные части', trust5_mini:'Полная документация переведена на русский язык', trust6_mini:'Соответствие европейским стандартам качества',
+    trust1_mini:'Профессиональное обучение по каждому аппарату', trust2_mini:'Полная гарантия на всё оборудование', trust3_mini:'Консультации и рекомендации при покупке и в процессе использования', trust4_mini:'Технический сервис в Латвии', trust5_mini:'Полная документация на латышском языке', trust6_mini:'Соответствие европейским стандартам качества',
     eq_eyebrow:'Оборудование', eq_title:'аппараты и цены',
     cat_pricenote:'Указанные цены ориентировочные (EUR, с НДС). Точное предложение, комплектацию и условия поставки подготовим индивидуально.',
     con_eyebrow:'Заявка', con_title:'Запросить предложение',
@@ -398,7 +423,7 @@ const i18n = {
     meta_devices:'Devices in range', meta_warranty:'Months warranty', meta_cert:'Certification',
     trust_eyebrow:'When you purchase Zemits', trust_title:'You receive everything you need',
     trust1:'Training', trust2:'24-month warranty', trust3:'Support', trust4:'Service', trust5:'Manual in Latvian', trust6:'CE Certificate',
-    trust1_mini:'Professional training for every device', trust2_mini:'Full warranty on all equipment', trust3_mini:'Consultations and assistance at any time', trust4_mini:'Technical service and spare parts', trust5_mini:'Full documentation available in English', trust6_mini:'Compliance with European quality standards',
+    trust1_mini:'Professional training for every device', trust2_mini:'Full warranty on all equipment', trust3_mini:'Consultations and guidance during purchase and use', trust4_mini:'Technical service in Latvia', trust5_mini:'Full documentation in Latvian', trust6_mini:'Compliance with European quality standards',
     eq_eyebrow:'Equipment', eq_title:'devices & pricing',
     cat_pricenote:'Listed prices are indicative (EUR, incl. VAT). We prepare an exact quote, configuration, and delivery terms individually.',
     con_eyebrow:'Request', con_title:'Request a quote',
@@ -490,7 +515,7 @@ const devices = [
     type:{lv:'Vakuuma–termomasāžas iekārta', ru:'Вакуумно-термомассажный аппарат', en:'Vacuum thermo-massage device'},
     feat:{
       lv:['Vakuuma–termomasāža'],
-      ru:['Вакуумно-термомассажа'],
+      ru:['Вакуумно-термомассаж'],
       en:['Vacuum thermo-massage']
     }},
   { name:'Zemits Evoplasma', price:3000, tag:'face', icon:'⚡',
@@ -514,7 +539,7 @@ const devices = [
       ru:['RF-лифтинг','Электропорация','Алмазная микродермабразия','Ультразвуковой пилинг','Фонофорез','Микротоковая терапия','Вакуумная терапия'],
       en:['RF lifting','Electroporation','Diamond microdermabrasion','Ultrasonic scrubber','Sonophoresis','Microcurrent therapy','Vacuum therapy']
     }},
-  { name:'Zemits Eu Sante', price:2700, tag:'face', icon:'💧',
+  { name:'Zemits Eau Sante NG', price:2700, tag:'face', icon:'💧',
     type:{lv:'Daudzfunkcionāla sejas platforma', ru:'Многофункциональная система для лица', en:'Multifunctional facial platform'},
     feat:{
       lv:['RF liftings','Ultraskaņas skrubis','Sonoforēze','Hidrodermabrāzija','Skābekļa terapija','Aukstuma terapija'],
@@ -706,7 +731,7 @@ const deviceInfo = {
     en:{desc:'Multifunction facial device with RF, microcurrent, diamond microdermabrasion, and more. SMART control auto-selects the program for each procedure.',
         treats:['Aging and skin laxity','Pigmentation','Dull and dehydrated skin','Facial muscle toning']}
   },
-  'Zemits Eu Sante': {
+  'Zemits Eau Sante NG': {
     lv:{desc:'Hidrodermabrāzijas sistēma sejai, kas attīra, eksfoliē un hidratē ādu, papildināta ar RF, sonoforēzi un skābekļa terapiju.',
         treats:['Aizsērējušas poras un komedoni','Dehidratācija un blāva āda','Smalkas grumbiņas','Vispārēja ādas atjaunošana']},
     ru:{desc:'Система гидродермабразии для лица: очищает, отшелушивает и увлажняет кожу, дополнена RF, сонофорезом и кислородной терапией.',
@@ -778,7 +803,7 @@ const deviceImg = {
   'Zemits Evoplasma':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/11.png',
   'Zemits Abigon Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/12.png',
   'Zemits Verstand Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/13.png',
-  'Zemits Eu Sante':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/14.png',
+  'Zemits Eau Sante NG':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/14.png',
   'Zemits Verstand':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/15.png',
   'Zemits Dermeluxx Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/16.png',
   'Zemits Sisley 2.0':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/17.png',
@@ -845,6 +870,7 @@ function renderDevices(){
 
 function setLang(lang){
   currentLang = lang;
+  try { localStorage.setItem('zemitsLang', lang); } catch(e) {}
   const t = i18n[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -961,8 +987,17 @@ function sendWhatsApp(){
 }
 
 /* ── INIT ── */
-renderDevices();
+function toggleMenu(force){
+  const m = document.getElementById('mobileMenu'), b = document.getElementById('burger');
+  const open = typeof force === 'boolean' ? force : !m.classList.contains('open');
+  m.classList.toggle('open', open); b.classList.toggle('open', open);
+  b.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
 populateDeviceSelect();
+let savedLang = 'lv'; try { savedLang = localStorage.getItem('zemitsLang') || 'lv'; } catch(e) {}
+if (!i18n[savedLang]) savedLang = 'lv';
+setLang(savedLang);
 </script>
 </body>
 </html>
