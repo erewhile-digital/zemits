@@ -106,7 +106,7 @@ section { padding: 100px 5vw; }
 .reveal-delay-1 { transition-delay: .1s; } .reveal-delay-2 { transition-delay: .2s; } .reveal-delay-3 { transition-delay: .3s; }
 
 /* ── ABOUT ── */
-#about { background: var(--white); }
+#about { background: var(--blue-ultra); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-top: 56px; }
 /* Left col: photo + team */
 .about-left { display: flex; flex-direction: column; gap: 24px; }
@@ -255,6 +255,22 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
 .footer-links a { font-size: .8rem; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: var(--white); }
 
+/* ── MOBILE MENU ── */
+.burger { display: none; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.12); cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 0; transition: background .3s, border-color .3s; }
+.burger span { display: block; width: 18px; height: 2px; background: #fff; border-radius: 2px; transition: transform .3s, opacity .3s, background .3s; }
+nav.scrolled .burger { background: var(--light); border-color: var(--mid); }
+nav.scrolled .burger span { background: var(--text); }
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { position: fixed; top: 0; left: 0; right: 0; z-index: 190; background: var(--white); padding: 88px 5vw 28px; box-shadow: var(--shadow-md); transform: translateY(-110%); transition: transform .35s ease; display: flex; flex-direction: column; visibility: hidden; }
+.mobile-menu.open { transform: none; visibility: visible; }
+.mobile-menu a { padding: 15px 4px; border-bottom: 1px solid var(--light); color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 400; }
+.mobile-menu a.m-active { color: var(--blue); font-weight: 500; }
+.mobile-menu a.m-cta { margin-top: 18px; border: none; background: var(--blue); color: var(--white); text-align: center; border-radius: 100px; font-weight: 500; }
+@media (max-width: 768px) { .burger { display: flex; } }
+.seminar-badge.mc { background: var(--teal); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
   .trust-grid { grid-template-columns: repeat(3, 1fr); }
@@ -296,7 +312,7 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
     </div>
     <div class="privacy-title" data-i18n="privacy_title">Privātuma politika</div>
     <div class="privacy-body" data-i18n="privacy_body">
-      Šī tīmekļa vietne izmanto tikai tehniski nepieciešamās funkcijas saziņai vietnē WhatsApp. Mēs<strong>neizmantojam</strong> trešo pušu analītiku un nenododam jūsu datus trešajām personām.<br><br>
+      Šī tīmekļa vietne izmanto tikai tehniski nepieciešamās funkcijas saziņai vietnē WhatsApp. Mēs <strong>neizmantojam</strong> trešo pušu analītiku un nenododam jūsu datus trešajām personām.<br><br>
       Iesniedzot pieteikumu, jūs piekrītat, ka jūsu kontaktinformācija tiks izmantota tikai saziņai ar «Zemits Skin Expert» speciālistiem.
     </div>
     <div class="privacy-btns">
@@ -314,8 +330,8 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
   </a>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a href="#about" data-i18n="nav_about">Par mums</a></li>
       <li><a href="#equipment" data-i18n="nav_equipment">Iekārtas</a></li>
+      <li><a href="#about" data-i18n="nav_about">Par mums</a></li>
       <li><a href="#seminars" data-i18n="nav_seminars">Semināri</a></li>
       <li><a href="#reviews" data-i18n="nav_reviews">Atsauksmes</a></li>
       <li><a href="#contacts" class="nav-cta" data-i18n="nav_contact">Sazināties</a></li>
@@ -325,8 +341,19 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
       <button class="lang-btn" onclick="setLang('ru')">RU</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#equipment" onclick="toggleMenu(false)" data-i18n="nav_equipment">Iekārtas</a>
+  <a href="#about" onclick="toggleMenu(false)" data-i18n="nav_about">Par mums</a>
+  <a href="#seminars" onclick="toggleMenu(false)" data-i18n="nav_seminars">Semināri</a>
+  <a href="#reviews" onclick="toggleMenu(false)" data-i18n="nav_reviews">Atsauksmes</a>
+  <a href="#contacts" class="m-cta" onclick="toggleMenu(false)" data-i18n="nav_contact">Sazināties</a>
+</div>
+
 
 <!-- HERO -->
 <section id="hero">
@@ -348,64 +375,6 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
          style="max-width:360px;width:90%;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 0 40px rgba(77,166,255,.28));">
   </div>
 
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <!-- LEFT: photo + team cards -->
-    <div class="about-left">
-      <div class="about-photo reveal reveal-delay-1" style="background-image:url('https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/team.jpeg');background-size:cover;background-position:center;">
-      </div>
-      <div class="team-cards">
-        <div class="team-card reveal reveal-delay-2">
-          <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/1.png" alt="Dace" class="team-avatar"
-               onerror="this.outerHTML='<div style=\'width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1a4a8a,#2d6bbf);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:1.3rem;color:white;font-style:italic\'>D</div>'">
-          <div>
-            <div class="team-name">Dace</div>
-            <div class="team-role" data-i18n="dace_role">Zemits Skin Expert vadītāja. Skaistumkopšanas speciālists kosmetoloģijā, ārstniecības persona, Zemits apmācību trenere.</div>
-          </div>
-        </div>
-        <div class="team-card reveal reveal-delay-3">
-          <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/2.png" alt="Iveta" class="team-avatar"
-               onerror="this.outerHTML='<div style=\'width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1a4a8a,#2d6bbf);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:1.3rem;color:white;font-style:italic\'>I</div>'">
-          <div>
-            <div class="team-name">Iveta</div>
-            <div class="team-role" data-i18n="iveta_role">Zemits Skin Expert menedžere. Skaistumkopšanas speciālists kosmetoloģijā, ārstniecības persona, Zemits apmācību trenere.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT: heading + stats + text -->
-    <div class="about-right">
-      <div>
-        <div class="section-eyebrow reveal" data-i18n="about_eyebrow">Par mums</div>
-        <h2 class="section-title reveal reveal-delay-1"><em data-i18n="about_title">Uzticams partneris</em></h2>
-        <p class="section-sub reveal reveal-delay-2" data-i18n="about_lead">Tiem, kuri novērtē inovācijas, kvalitāti un ilgtermiņa sadarbību.</p>
-      </div>
-
-      <div class="about-stats-row reveal reveal-delay-1">
-        <div class="about-stat">
-          <div class="stat-num">10<span>+</span></div>
-          <div class="stat-desc" data-i18n="stat1">Gadi nozarē</div>
-        </div>
-        <div class="about-stat">
-          <div class="stat-num">500<span>+</span></div>
-          <div class="stat-desc" data-i18n="stat2">Apmācīti meistari</div>
-        </div>
-        <div class="about-stat">
-          <div class="stat-num">3</div>
-          <div class="stat-desc" data-i18n="stat3">Baltijas valstis</div>
-        </div>
-      </div>
-
-      <div class="reveal reveal-delay-2">
-        <p class="about-intro" data-i18n="about_p1">Zemits Skin Expert ir officiālais Zemits pārstāvis Baltijas valstīs, piedāvājot profesionālas estētiskās kosmetoloģijas iekārtas skaistumkopšanas saloniem, estētikas klīnikām un speciālistiem.</p>
-        <p class="about-intro" style="margin-top:16px;" data-i18n="about_p2">Mēs nodrošinām mūsdienīgus un inovatīvus risinājumus sejas un ķermeņa procedūrām, apvienojot augstu kvalitāti, drošību un efektīvus rezultātus. Papildus profesionālajām iekārtām piedāvājam profesionālas apmācības, procedūru protokolus, tehnisko un konsultatīvo atbalstu, un palīdzību veiksmīgai biznesa attīstībai.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- WHY ZEMITS -->
@@ -473,7 +442,7 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
     </div>
     <div class="equipment-card reveal reveal-delay-2">
       <div class="eq-img-placeholder"><span class="eq-tag both" data-i18n="tag_both">Seja/ķermenis</span><span class="eq-icon">❄️</span></div>
-      <div class="eq-body"><div class="eq-name">Zemits FrioLift Cryo RF</div><div class="eq-type" data-i18n="frio_type">Kontrasta ādas atjaunošanas sistēma</div><ul class="eq-features"><li data-i18n="frio_f1">Multipolārs, bipolārs un tripolārs RF liftings</li><li data-i18n="frio_f2">Krioterapija</li><li data-i18n="frio_f3">Sejas un ķermeņa nostiprināšana</li></ul></div>
+      <div class="eq-body"><div class="eq-name">Zemits Friolift</div><div class="eq-type" data-i18n="frio_type">Kontrasta ādas atjaunošanas sistēma</div><ul class="eq-features"><li data-i18n="frio_f1">Multipolārs, bipolārs un tripolārs RF liftings</li><li data-i18n="frio_f2">Krioterapija</li><li data-i18n="frio_f3">Sejas un ķermeņa nostiprināšana</li></ul></div>
     </div>
     <div class="equipment-card reveal">
       <div class="eq-img-placeholder"><span class="eq-tag laser" data-i18n="tag_laser">Lāzers</span><span class="eq-icon">🔴</span></div>
@@ -485,7 +454,7 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
     </div>
     <div class="equipment-card reveal reveal-delay-2">
       <div class="eq-img-placeholder"><span class="eq-tag new">NEW</span><span class="eq-icon">🌊</span></div>
-      <div class="eq-body"><div class="eq-name">Endoluxx PRO</div><div class="eq-type" data-i18n="endo_type">Kompresijas mikrovibrācijas sistēma</div><ul class="eq-features"><li data-i18n="endo_f1">Inovatīva kompresijas mikrovibrāciju sistēma</li><li data-i18n="endo_f2">Piemērojama visam ķermenim un sejai</li><li data-i18n="endo_f3">Pretcelulīta terapija</li><li data-i18n="endo_f4">Muskuļu sasprindzinājuma atbrīvošana</li></ul></div>
+      <div class="eq-body"><div class="eq-name">Zemits Endoluxx Pro</div><div class="eq-type" data-i18n="endo_type">Kompresijas mikrovibrācijas sistēma</div><ul class="eq-features"><li data-i18n="endo_f1">Inovatīva kompresijas mikrovibrāciju sistēma</li><li data-i18n="endo_f2">Piemērojama visam ķermenim un sejai</li><li data-i18n="endo_f3">Pretcelulīta terapija</li><li data-i18n="endo_f4">Muskuļu sasprindzinājuma atbrīvošana</li></ul></div>
     </div>
   </div>
   <div class="equipment-cta reveal">
@@ -497,6 +466,64 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
       <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
       <span data-i18n="cta_btn">Skatīt visas iekārtas</span>
     </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <!-- LEFT: photo + team cards -->
+    <div class="about-left">
+      <div class="about-photo reveal reveal-delay-1" style="background-image:url('https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/team.jpeg');background-size:cover;background-position:center;">
+      </div>
+      <div class="team-cards">
+        <div class="team-card reveal reveal-delay-2">
+          <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/1.png" alt="Dace" class="team-avatar"
+               onerror="this.outerHTML='<div style=\'width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1a4a8a,#2d6bbf);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:1.3rem;color:white;font-style:italic\'>D</div>'">
+          <div>
+            <div class="team-name">Dace</div>
+            <div class="team-role" data-i18n="dace_role">Zemits Skin Expert vadītāja. Skaistumkopšanas speciālists kosmetoloģijā, ārstniecības persona, Zemits apmācību trenere.</div>
+          </div>
+        </div>
+        <div class="team-card reveal reveal-delay-3">
+          <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/2.png" alt="Iveta" class="team-avatar"
+               onerror="this.outerHTML='<div style=\'width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1a4a8a,#2d6bbf);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:1.3rem;color:white;font-style:italic\'>I</div>'">
+          <div>
+            <div class="team-name">Iveta</div>
+            <div class="team-role" data-i18n="iveta_role">Zemits Skin Expert menedžere. Skaistumkopšanas speciālists kosmetoloģijā, ārstniecības persona, Zemits apmācību trenere.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: heading + stats + text -->
+    <div class="about-right">
+      <div>
+        <div class="section-eyebrow reveal" data-i18n="about_eyebrow">Par mums</div>
+        <h2 class="section-title reveal reveal-delay-1"><em data-i18n="about_title">Uzticams partneris</em></h2>
+        <p class="section-sub reveal reveal-delay-2" data-i18n="about_lead">Tiem, kuri novērtē inovācijas, kvalitāti un ilgtermiņa sadarbību.</p>
+      </div>
+
+      <div class="about-stats-row reveal reveal-delay-1">
+        <div class="about-stat">
+          <div class="stat-num">15<span>+</span></div>
+          <div class="stat-desc" data-i18n="stat1">Gadi nozarē</div>
+        </div>
+        <div class="about-stat">
+          <div class="stat-num">500<span>+</span></div>
+          <div class="stat-desc" data-i18n="stat2">Apmācīti meistari</div>
+        </div>
+        <div class="about-stat">
+          <div class="stat-num">3</div>
+          <div class="stat-desc" data-i18n="stat3">Baltijas valstis</div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <p class="about-intro" data-i18n="about_p1">Zemits Skin Expert ir oficiālais Zemits pārstāvis Baltijas valstīs, piedāvājot profesionālas estētiskās kosmetoloģijas iekārtas skaistumkopšanas saloniem, estētikas klīnikām un speciālistiem.</p>
+        <p class="about-intro" style="margin-top:16px;" data-i18n="about_p2">Mēs nodrošinām mūsdienīgus un inovatīvus risinājumus sejas un ķermeņa procedūrām, apvienojot augstu kvalitāti, drošību un efektīvus rezultātus. Papildus profesionālajām iekārtām piedāvājam profesionālas apmācības, procedūru protokolus, tehnisko un konsultatīvo atbalstu, un palīdzību veiksmīgai biznesa attīstībai.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -518,12 +545,12 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
     <div class="trust-item reveal reveal-delay-2">
       <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/7.png" alt="Atbalsts" style="width:56px;height:56px;object-fit:contain;border-radius:14px;">
       <div class="trust-label" data-i18n="trust3">Atbalsts</div>
-      <div class="trust-mini" data-i18n="trust3_mini">Konsultācijas un palīdzība jebkurā laikā</div>
+      <div class="trust-mini" data-i18n="trust3_mini">Konsultācijas un ieteikumi iegādes un lietošanas procesā</div>
     </div>
     <div class="trust-item reveal">
       <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/8.png" alt="Serviss" style="width:56px;height:56px;object-fit:contain;border-radius:14px;">
       <div class="trust-label" data-i18n="trust4">Serviss</div>
-      <div class="trust-mini" data-i18n="trust4_mini">Tehniskais serviss un rezerves daļas</div>
+      <div class="trust-mini" data-i18n="trust4_mini">Tehniskais serviss Latvijā</div>
     </div>
     <div class="trust-item reveal reveal-delay-1">
       <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/icons/9.png" alt="Instrukcija" style="width:56px;height:56px;object-fit:contain;border-radius:14px;">
@@ -576,35 +603,46 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
 
 <!-- SEMINARS -->
 <section id="seminars">
-  <div class="section-eyebrow reveal" data-i18n="sem_eyebrow">Semināri un meistarklases</div>
+  <div class="section-eyebrow reveal" data-i18n="sem_eyebrow">Aparāts ir instruments. Zināšanas un prasmes – rezultāts.</div>
   <h2 class="section-title reveal reveal-delay-1" data-i18n="sem_title">Tuvākie <em>pasākumi</em></h2>
   <p class="section-sub reveal reveal-delay-2" data-i18n="sem_desc">Sper nākamo soli savā profesionālajā izaugsmē un kļūsti par estētiskās kosmetoloģijas ekspertu kopā ar mums!</p>
 
   <div class="seminars-list">
     <div class="seminar-item seminar-featured reveal">
-      <div class="seminar-date-block"><div class="seminar-day">31</div><div class="seminar-month" data-i18n="month_may">Maijs</div><div class="seminar-time">11:00</div></div>
+      <div class="seminar-date-block"><div class="seminar-day">26</div><div class="seminar-month" data-i18n="month_oct">Oktobris</div><div class="seminar-time">10:00</div></div>
       <div class="seminar-info">
-        <div class="seminar-badge">✨ EVOPLASMA Skin Expert Brunch</div>
-        <div class="seminar-title" data-i18n="ev1_title">Svētdienas skaistuma rīts profesionāļiem</div>
-        <div class="seminar-desc" data-i18n="ev1_desc">Riga Islande Hotel · Ar vieglu eleganci, iedvesmu un jauniem atklājumiem estētikā. Procedūra bez papildizmaksām. Pieteikšanās līdz 21. maijam: <a href="tel:+37126767517" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 26767517</a></div>
-        <div class="seminar-deadline" data-i18n="ev1_deadline">⚠️ Vietu skaits ierobežots</div>
+        <div class="seminar-badge" data-i18n="ev_badge_sem">Seminārs</div>
+        <div class="seminar-title" data-i18n="ev1_title">ev1</div>
+        <div class="seminar-desc" data-i18n="ev1_desc">ev1</div>
       </div>
-      <div class="seminar-meta">
-        <div class="seminar-price-label" data-i18n="price_label">Dalības maksa</div>
-        <div class="seminar-price">45 €</div>
-        <div style="font-size:.72rem;color:var(--text-muted);margin-top:4px;margin-bottom:8px" data-i18n="ev1_price_note">35 € ZEMITS klientiem</div>
-        <a href="#contacts" class="btn-register" data-i18n="register_btn">Pieteikties</a>
-      </div>
-    </div>
-    <div class="seminar-item reveal">
-      <div class="seminar-date-block"><div class="seminar-day">—</div><div class="seminar-month" data-i18n="soon">Drīzumā</div><div class="seminar-time">—</div></div>
-      <div class="seminar-info"><div class="seminar-title" data-i18n="sem1_title">Semināra nosaukums</div><div class="seminar-desc" data-i18n="sem1_desc">Semināra apraksts.</div></div>
-      <div class="seminar-meta"><div class="seminar-price-label" data-i18n="price_label">Dalības maksa</div><div class="seminar-price">— €</div><a href="#contacts" class="btn-register" data-i18n="register_btn">Pieteikties</a></div>
+      <div class="seminar-meta"><div class="seminar-price-label" data-i18n="price_label">Dalības maksa</div><div class="seminar-price">30 €</div><a href="#contacts" class="btn-register" onclick="pickTopic('ev1')" data-i18n="register_btn">Pieteikties</a></div>
     </div>
     <div class="seminar-item reveal reveal-delay-1">
-      <div class="seminar-date-block"><div class="seminar-day">—</div><div class="seminar-month" data-i18n="soon">Drīzumā</div><div class="seminar-time">—</div></div>
-      <div class="seminar-info"><div class="seminar-title" data-i18n="sem2_title">Semināra nosaukums</div><div class="seminar-desc" data-i18n="sem2_desc">Semināra apraksts.</div></div>
-      <div class="seminar-meta"><div class="seminar-price-label" data-i18n="price_label">Dalības maksa</div><div class="seminar-price">— €</div><a href="#contacts" class="btn-register" data-i18n="register_btn">Pieteikties</a></div>
+      <div class="seminar-date-block"><div class="seminar-day">10</div><div class="seminar-month" data-i18n="month_sep">Septembris</div><div class="seminar-time">11:00</div></div>
+      <div class="seminar-info">
+        <div class="seminar-badge" data-i18n="ev_badge_sem">Seminārs</div>
+        <div class="seminar-title" data-i18n="ev2_title">ev2</div>
+        <div class="seminar-desc" data-i18n="ev2_desc">ev2</div>
+      </div>
+      <div class="seminar-meta"><a href="#contacts" class="btn-register" onclick="pickTopic('ev2')" data-i18n="register_btn">Pieteikties</a></div>
+    </div>
+    <div class="seminar-item reveal">
+      <div class="seminar-date-block"><div class="seminar-day">23–24</div><div class="seminar-month" data-i18n="month_nov">Novembris</div></div>
+      <div class="seminar-info">
+        <div class="seminar-badge mc" data-i18n="ev_badge_mc">Meistarklase</div>
+        <div class="seminar-title" data-i18n="ev3_title">ev3</div>
+        <div class="seminar-desc" data-i18n="ev3_desc">ev3</div>
+      </div>
+      <div class="seminar-meta"><a href="#contacts" class="btn-register" onclick="pickTopic('ev3')" data-i18n="register_btn">Pieteikties</a></div>
+    </div>
+    <div class="seminar-item reveal reveal-delay-1">
+      <div class="seminar-date-block"><div class="seminar-day">26</div><div class="seminar-month" data-i18n="month_oct">Oktobris</div><div class="seminar-time">15:00</div></div>
+      <div class="seminar-info">
+        <div class="seminar-badge" data-i18n="ev_badge_sem">Seminārs</div>
+        <div class="seminar-title" data-i18n="ev4_title">ev4</div>
+        <div class="seminar-desc" data-i18n="ev4_desc">ev4</div>
+      </div>
+      <div class="seminar-meta"><a href="#contacts" class="btn-register" onclick="pickTopic('ev4')" data-i18n="register_btn">Pieteikties</a></div>
     </div>
   </div>
 </section>
@@ -645,7 +683,10 @@ footer { background: var(--text); color: var(--white); padding: 40px 5vw; displa
         <select id="waSubject" onchange="updateTopicPreview()">
           <option value="" disabled selected data-i18n="form_subject_ph">Izvēlieties tēmu…</option>
           <option value="Iekārtu iegāde" data-i18n="form_opt1">Iekārtu iegāde</option>
-          <option value="EVOPLASMA Brunch 31.05">EVOPLASMA Brunch 31.05.2026</option>
+          <option value="ev1" data-i18n="ev1_opt">Seminārs 26.10 — Presoterapija &amp; LED</option>
+          <option value="ev2" data-i18n="ev2_opt">Seminārs 10.09 — Mikrostrāvu efekts</option>
+          <option value="ev3" data-i18n="ev3_opt">Meistarklase 23–24.11 — Mikrostrāvas apmācības PRO</option>
+          <option value="ev4" data-i18n="ev4_opt">Seminārs 26.10 — Iepazīsimies Zemits</option>
           <option value="Semināra pieteikums" data-i18n="form_opt2">Semināra pieteikums</option>
           <option value="Konsultācija" data-i18n="form_opt3">Konsultācija par iekārtu izvēli</option>
           <option value="Apmācības" data-i18n="form_opt4">Apmācības un kursi</option>
@@ -684,7 +725,7 @@ const i18n = {
     hero_cta1:'Aplūkot iekārtas →', hero_cta2:'Semināri 2026',
     about_eyebrow:'Par mums', about_title:'Uzticams partneris', about_lead:'Tiem, kuri novērtē inovācijas, kvalitāti un ilgtermiņa sadarbību.',
     stat1:'Gadi nozarē', stat2:'Apmācīti meistari', stat3:'Baltijas valstis',
-    about_p1:'Zemits Skin Expert ir officiālais Zemits pārstāvis Baltijas valstīs, piedāvājot profesionālas estētiskās kosmetoloģijas iekārtas skaistumkopšanas saloniem, estētikas klīnikām un speciālistiem.',
+    about_p1:'Zemits Skin Expert ir oficiālais Zemits pārstāvis Baltijas valstīs, piedāvājot profesionālas estētiskās kosmetoloģijas iekārtas skaistumkopšanas saloniem, estētikas klīnikām un speciālistiem.',
     about_p2:'Mēs nodrošinām mūsdienīgus un inovatīvus risinājumus sejas un ķermeņa procedūrām, apvienojot augstu kvalitāti, drošību un efektīvus rezultātus. Zemits piedāvā kosmetoloģijas iekārtas, profesionālo kosmētiku darbam ar iekārtām un apmācības — tā jūs saņemat ne tikai pašu iekārtu, bet arī specializētos līdzekļus un zināšanas, kas atvieglo kosmetologa darbu. Papildus nodrošinām procedūru protokolus, tehnisko un konsultatīvo atbalstu un palīdzību veiksmīgai biznesa attīstībai.',
     dace_role:'Zemits Skin Expert vadītāja. Skaistumkopšanas speciālists kosmetoloģijā, ārstniecības persona, Zemits apmācību trenere.',
     iveta_role:'Zemits Skin Expert menedžere. Skaistumkopšanas speciālists kosmetoloģijā, ārstniecības persona, Zemits apmācību trenere.',
@@ -708,15 +749,17 @@ const i18n = {
     cta_title:'Vēlies apskatīt<br><em>visu iekārtu klāstu?</em>', cta_sub:'Pilnajā katalogā pieejama detalizēta informācija, tehniskās specifikācijas un procedūru protokoli katrai iekārtai.', cta_btn:'Skatīt visas iekārtas',
     trust_eyebrow:'Iegādājoties Zemits', trust_title:'Jūs saņemat <em>visu nepieciešamo</em>',
     trust1:'Apmācības', trust2:'24 mēneši garantija', trust3:'Atbalsts', trust4:'Serviss', trust5:'Instrukcija latviešu valodā', trust6:'CE Sertifikāts',
-    trust1_mini:'Profesionālas apmācības katrai iekārtai', trust2_mini:'Pilna garantija visām iekārtām', trust3_mini:'Konsultācijas un palīdzība jebkurā laikā', trust4_mini:'Tehniskais serviss un rezerves daļas', trust5_mini:'Katrai iekārtai pievienota instrukcija latviešu valodā', trust6_mini:'Atbilstība Eiropas kvalitātes standartiem',
+    trust1_mini:'Profesionālas apmācības katrai iekārtai', trust2_mini:'Pilna garantija visām iekārtām', trust3_mini:'Konsultācijas un ieteikumi iegādes un lietošanas procesā', trust4_mini:'Tehniskais serviss Latvijā', trust5_mini:'Katrai iekārtai pievienota instrukcija latviešu valodā', trust6_mini:'Atbilstība Eiropas kvalitātes standartiem',
     ba_eyebrow:'Rezultāti', ba_title:'Pirms un <em>pēc</em>', ba_desc:'Pārvietojiet slīdni, lai salīdzinātu rezultātus. Reālu procedūru foto.',
     ba_before:'Pirms procedūras', ba_after:'Pēc procedūras', ba_before_lbl:'PIRMS', ba_after_lbl:'PĒC',
     ba_cap1:'Sejas procedūra · Zemits Verstand HD Pro', ba_cap2:'Sejas procedūra · Zemits Verstand HD Pro', ba_cap3:'Sejas procedūra · Zemits Verstand HD Pro',
-    sem_eyebrow:'Semināri un meistarklases', sem_title:'Tuvākie <em>pasākumi</em>', sem_desc:'Sper soli savā profesionālajā izaugsmē un kļūsti par estētiskās kosmetoloģijas ekspertu kopā ar mums!',
+    sem_eyebrow:'Aparāts ir instruments. Zināšanas un prasmes – rezultāts.', sem_title:'Tuvākie <em>pasākumi</em>', sem_desc:'Sper soli savā profesionālajā izaugsmē un kļūsti par estētiskās kosmetoloģijas ekspertu kopā ar mums!',
+    month_sep:'Septembris', month_oct:'Oktobris', month_nov:'Novembris', ev_badge_sem:'Seminārs', ev_badge_mc:'Meistarklase',
+    ev1_title:'Presoterapija & LED profesionālajā praksē', ev1_desc:'Kā radīt lielāku vērtību vienā procedūrā. Lektore: Iveta Bartkeviča. Rīga, Lāčplēša iela 27-9. Pieteikšanās: <a href="tel:+37122015527" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 22 015 527</a>', ev1_opt:'Seminārs 26.10 — Presoterapija & LED',
+    ev2_title:'Mikrostrāvu efekts & kombinācija ar citām procedūrām', ev2_desc:'Izzini mikrostrāvu iedarbības principus un uzzini, kā tos efektīvi kombinēt ar citām procedūrām, lai sasniegtu izcilus rezultātus! Seminārā uzzināsi: mikrostrāvu efekta būtību un iedarbības mehānismus, kombināciju iespējas ar citām procedūrām, praktiskus ieteikumus un pieredzes apmaiņu.', ev2_opt:'Seminārs 10.09 — Mikrostrāvu efekts',
+    ev3_title:'Mikrostrāvas apmācības PRO', ev3_desc:'Padziļināta praktiskā apmācība mikrostrāvas procedūru veikšanā – droši, efektīvi un profesionāli! Praktiska pieredze darbā ar mikrostrāvu iekārtām, efektīvas procedūru tehnikas, atbildes uz profesionāliem jautājumiem. Pieteikšanās: <a href="tel:+37122015527" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 22 015 527</a>', ev3_opt:'Meistarklase 23–24.11 — Mikrostrāvas apmācības PRO',
+    ev4_title:'Iepazīsimies — Zemits', ev4_desc:'Uzzini par zīmolu, tehnoloģijām, produktu iespējām un profesionālā atbalsta iespējām. Vada: Dace Tione, Zemits Latvija vadītāja un trenere.', ev4_opt:'Seminārs 26.10 — Iepazīsimies Zemits',
     month_may:'Maijs', soon:'Drīzumā', price_label:'Dalības maksa', register_btn:'Pieteikties',
-    ev1_title:'Svētdienas skaistuma rīts profesionāļiem', ev1_desc:'Riga Islande Hotel · Ar vieglu eleganci, iedvesmu un jauniem atklājumiem estētikā. Procedūra bez papildizmaksām. Pieteikšanās līdz 21. maijam: <a href="tel:+37126767517" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 26767517</a>', ev1_deadline:'⚠️ Vietu skaits ierobežots', ev1_price_note:'35 € ZEMITS klientiem',
-    sem1_title:'Semināra nosaukums', sem1_desc:'Semināra apraksts.',
-    sem2_title:'Semināra nosaukums', sem2_desc:'Semināra apraksts.',
     rev_eyebrow:'Atsauksmes', rev_title:'Ko saka <em>mūsu klienti</em>',
     con_eyebrow:'Kontakti', con_title:'Sazinies ar mums<br><em>jau šodien</em>', con_desc:'Labprāt atbildēsim uz jūsu jautājumiem, sniegsim konsultāciju un palīdzēsim pieteikties semināram.',
     con_phone_lbl:'Telefons', con_addr_lbl:'Adrese', con_addr:'Vienības gatve 192, Rīga, Latvija',
@@ -760,15 +803,17 @@ const i18n = {
     cta_title:'Хотите ознакомиться со всем ассортиментом?', cta_sub:'В нашем полном каталоге аппаратов вы найдёте подробную информацию, технические характеристики и протоколы процедур для каждого устройства.', cta_btn:'Смотреть все аппараты',
     trust_eyebrow:'При покупке Zemits', trust_title:'Вы получаете <em>всё необходимое</em>',
     trust1:'Обучение', trust2:'Гарантия 24 месяца', trust3:'Поддержка', trust4:'Сервис', trust5:'Инструкция на латышском языке', trust6:'CE Сертификат',
-    trust1_mini:'Профессиональное обучение по каждому аппарату', trust2_mini:'Полная гарантия на всё оборудование', trust3_mini:'Консультации и помощь в любое время', trust4_mini:'Технический сервис и запасные части', trust5_mini:'К каждому аппарату прилагается инструкция на латышском языке', trust6_mini:'Соответствие европейским стандартам качества',
+    trust1_mini:'Профессиональное обучение по каждому аппарату', trust2_mini:'Полная гарантия на всё оборудование', trust3_mini:'Консультации и рекомендации при покупке и в процессе использования', trust4_mini:'Технический сервис в Латвии', trust5_mini:'К каждому аппарату прилагается инструкция на латышском языке', trust6_mini:'Соответствие европейским стандартам качества',
     ba_eyebrow:'Результаты', ba_title:'До и <em>после</em>', ba_desc:'Перетащите ползунок, чтобы сравнить результаты. Фотографии из реальных процедур.',
     ba_before:'До процедуры', ba_after:'После процедуры', ba_before_lbl:'ДО', ba_after_lbl:'ПОСЛЕ',
     ba_cap1:'Процедура для лица · Zemits Verstand HD Pro', ba_cap2:'Процедура для лица · Zemits Verstand HD Pro', ba_cap3:'Процедура для лица · Zemits Verstand HD Pro',
-    sem_eyebrow:'Семинары и мастер-классы', sem_title:'Ближайшие <em>мероприятия</em>', sem_desc:'Сделайте следующий шаг в своём профессиональном развитии и станьте экспертом в эстетической косметологии вместе с нами!',
+    sem_eyebrow:'Аппарат — это инструмент. Знания и навыки — результат.', sem_title:'Ближайшие <em>мероприятия</em>', sem_desc:'Сделайте следующий шаг в своём профессиональном развитии и станьте экспертом в эстетической косметологии вместе с нами!',
+    month_sep:'Сентябрь', month_oct:'Октябрь', month_nov:'Ноябрь', ev_badge_sem:'Семинар', ev_badge_mc:'Мастер-класс',
+    ev1_title:'Прессотерапия и LED в профессиональной практике', ev1_desc:'Как создать больше ценности в одной процедуре. Лектор: Iveta Bartkeviča. Рига, Lāčplēša iela 27-9. Запись: <a href="tel:+37122015527" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 22 015 527</a>', ev1_opt:'Семинар 26.10 — Прессотерапия и LED',
+    ev2_title:'Эффект микротоков и сочетание с другими процедурами', ev2_desc:'Узнайте принципы действия микротоков и как эффективно сочетать их с другими процедурами для отличных результатов! На семинаре вы узнаете: суть эффекта микротоков и механизмы действия, возможности сочетания с другими процедурами, практические рекомендации и обмен опытом.', ev2_opt:'Семинар 10.09 — Эффект микротоков',
+    ev3_title:'Обучение микротокам PRO', ev3_desc:'Углублённое практическое обучение проведению микротоковых процедур — безопасно, эффективно и профессионально! Практический опыт работы с микротоковыми аппаратами, эффективные техники процедур, ответы на профессиональные вопросы. Запись: <a href="tel:+37122015527" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 22 015 527</a>', ev3_opt:'Мастер-класс 23–24.11 — Обучение микротокам PRO',
+    ev4_title:'Знакомство с Zemits', ev4_desc:'Узнайте о бренде, технологиях, возможностях продуктов и профессиональной поддержке. Ведёт: Dace Tione, руководитель и тренер Zemits Latvija.', ev4_opt:'Семинар 26.10 — Знакомство с Zemits',
     month_may:'Май', soon:'Скоро', price_label:'Стоимость участия', register_btn:'Записаться',
-    ev1_title:'Воскресный beauty-бранч для профессионалов', ev1_desc:'Riga Islande Hotel · С лёгким изяществом, вдохновением и новыми открытиями в эстетике. Процедура без доплаты. Регистрация до 21 мая: <a href="tel:+37126767517" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 26767517</a>', ev1_deadline:'⚠️ Количество мест ограничено', ev1_price_note:'35 € для клиентов ZEMITS',
-    sem1_title:'Название семинара', sem1_desc:'Описание семинара.',
-    sem2_title:'Название семинара', sem2_desc:'Описание семинара.',
     rev_eyebrow:'Отзывы', rev_title:'Что говорят <em>наши клиенты</em>',
     con_eyebrow:'Контакты', con_title:'Свяжемся<br><em>уже сегодня</em>', con_desc:'Мы всегда готовы ответить на ваши вопросы, провести консультацию или помочь записаться на семинар.',
     con_phone_lbl:'Телефон', con_addr_lbl:'Адрес', con_addr:'Vienības gatve 192, Рига, Латвия',
@@ -812,15 +857,17 @@ const i18n = {
     cta_title:'Want to explore the full range?', cta_sub:'Our complete device catalogue includes detailed information, technical specifications, and treatment protocols for every device.', cta_btn:'View all devices',
     trust_eyebrow:'When you purchase Zemits', trust_title:'You receive <em>everything you need</em>',
     trust1:'Training', trust2:'24-month warranty', trust3:'Support', trust4:'Service', trust5:'Manual in Latvian', trust6:'CE Certificate',
-    trust1_mini:'Professional training for every device', trust2_mini:'Full warranty on all equipment', trust3_mini:'Consultations and assistance at any time', trust4_mini:'Technical service and spare parts', trust5_mini:'Every device comes with a manual in Latvian', trust6_mini:'Compliance with European quality standards',
+    trust1_mini:'Professional training for every device', trust2_mini:'Full warranty on all equipment', trust3_mini:'Consultations and guidance during purchase and use', trust4_mini:'Technical service in Latvia', trust5_mini:'Every device comes with a manual in Latvian', trust6_mini:'Compliance with European quality standards',
     ba_eyebrow:'Results', ba_title:'Before and <em>after</em>', ba_desc:'Drag the slider to compare results. Photos from real treatments.',
     ba_before:'Before treatment', ba_after:'After treatment', ba_before_lbl:'BEFORE', ba_after_lbl:'AFTER',
     ba_cap1:'Facial treatment · Zemits Verstand HD Pro', ba_cap2:'Facial treatment · Zemits Verstand HD Pro', ba_cap3:'Facial treatment · Zemits Verstand HD Pro',
-    sem_eyebrow:'Seminars & masterclasses', sem_title:'Upcoming <em>events</em>', sem_desc:'Take the next step in your professional development and become an expert in aesthetic cosmetology with us!',
+    sem_eyebrow:'A device is a tool. Knowledge and skills deliver results.', sem_title:'Upcoming <em>events</em>', sem_desc:'Take the next step in your professional development and become an expert in aesthetic cosmetology with us!',
+    month_sep:'September', month_oct:'October', month_nov:'November', ev_badge_sem:'Seminar', ev_badge_mc:'Masterclass',
+    ev1_title:'Pressotherapy & LED in professional practice', ev1_desc:'How to create more value in a single treatment. Lecturer: Iveta Bartkeviča. Riga, Lāčplēša iela 27-9. Registration: <a href="tel:+37122015527" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 22 015 527</a>', ev1_opt:'Seminar 26.10 — Pressotherapy & LED',
+    ev2_title:'Microcurrent effect & combining it with other treatments', ev2_desc:'Learn how microcurrents work and how to combine them effectively with other treatments for outstanding results! You will learn: the essence and mechanisms of the microcurrent effect, options for combining with other treatments, practical tips and experience sharing.', ev2_opt:'Seminar 10.09 — Microcurrent effect',
+    ev3_title:'Microcurrent Training PRO', ev3_desc:'In-depth hands-on training in performing microcurrent treatments — safely, effectively and professionally! Practical experience with microcurrent devices, effective treatment techniques, answers to professional questions. Registration: <a href="tel:+37122015527" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 22 015 527</a>', ev3_opt:'Masterclass 23–24.11 — Microcurrent Training PRO',
+    ev4_title:'Getting to know Zemits', ev4_desc:'Learn about the brand, technologies, product possibilities and professional support. Hosted by Dace Tione, head and trainer of Zemits Latvija.', ev4_opt:'Seminar 26.10 — Getting to know Zemits',
     month_may:'May', soon:'Coming soon', price_label:'Participation fee', register_btn:'Sign up',
-    ev1_title:'Sunday beauty brunch for professionals', ev1_desc:'Riga Islande Hotel · An elegant morning of inspiration and fresh discoveries in aesthetics. Treatment included at no extra cost. Registration by 21 May: <a href="tel:+37126767517" style="color:var(--blue-mid);text-decoration:none;font-weight:500">+371 26767517</a>', ev1_deadline:'⚠️ Limited spots available', ev1_price_note:'35 € for existing ZEMITS clients',
-    sem1_title:'Seminar title', sem1_desc:'Seminar description.',
-    sem2_title:'Seminar title', sem2_desc:'Seminar description.',
     rev_eyebrow:'Reviews', rev_title:'What <em>our clients</em> say',
     con_eyebrow:'Contact', con_title:'Get in touch<br><em>right now</em>', con_desc:'We are available to answer your questions, provide a consultation, or help you sign up for a seminar.',
     con_phone_lbl:'Phone', con_addr_lbl:'Address', con_addr:'Vienības gatve 192, Riga, Latvia',
@@ -837,6 +884,7 @@ let currentLang = 'lv';
 
 function setLang(lang) {
   currentLang = lang;
+  try { localStorage.setItem('zemitsLang', lang); } catch(e) {}
   const t = i18n[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -860,7 +908,18 @@ if(sessionStorage.getItem('privacyAccepted')) document.getElementById('privacyOv
 
 /* ── NAV ── */
 const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+let menuOpen = false;
+function syncNav(){ nav.classList.toggle('scrolled', window.scrollY > 50 || menuOpen); }
+window.addEventListener('scroll', syncNav);
+function toggleMenu(force){
+  const m = document.getElementById('mobileMenu'), b = document.getElementById('burger');
+  menuOpen = typeof force === 'boolean' ? force : !m.classList.contains('open');
+  m.classList.toggle('open', menuOpen); b.classList.toggle('open', menuOpen);
+  b.setAttribute('aria-expanded', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+  syncNav();
+}
+function pickTopic(v){ const sel = document.getElementById('waSubject'); if(sel){ sel.value = v; updateTopicPreview(); } }
 
 /* ── REVEAL ── */
 const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }), {threshold:.1});
@@ -924,7 +983,9 @@ function updateTopicPreview(){
     }
   });
 })();
-setLang('lv');
+let savedLang = 'lv'; try { savedLang = localStorage.getItem('zemitsLang') || 'lv'; } catch(e) {}
+if (!i18n[savedLang]) savedLang = 'lv';
+setLang(savedLang);
 </script>
 </body>
 </html>
