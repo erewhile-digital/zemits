@@ -211,7 +211,7 @@ section.block { padding: 90px 5vw; }
 .dm-req:hover { background: var(--blue-mid); box-shadow: 0 8px 24px rgba(26,74,138,.3); transform: translateY(-2px); }
 @media (max-width: 600px) { .dm-grid { grid-template-columns: 1fr; } .dm-inc { grid-template-columns: 1fr; } .dev-modal { padding: 32px 24px 24px; } }
 .eq-icon-fallback { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
-.eq-photo { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; }
+.eq-photo { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: contain; }
 .dm-icon { position: relative; }
 .dm-emoji-fallback { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
 .dm-photo { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; padding: 8px; }
@@ -278,10 +278,9 @@ nav .burger span { background: var(--text); }
 /* phones + tablets: the map keeps desktop scale and is swiped sideways; region buttons jump between continents */
 @media (max-width: 900px) {
   #cat-hero { padding-bottom: 56px; }
-  .hero-map { margin-top: 0; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; touch-action: pan-x pan-y;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%); }
+  .hero-map { margin-top: 0; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: none; scrollbar-width: none; touch-action: pan-x pan-y; }
   .hero-map::-webkit-scrollbar { display: none; }
-  .map { width: 1060px; max-width: none; margin: 0 36px;
+  .map { width: 1060px; max-width: none; margin: 0;
     -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 90%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 90%, transparent 100%); }
   .map-legend { display: none; }
   .legend-m { display: block; position: relative; z-index: 2; margin: 28px 5vw 0; }
@@ -1002,10 +1001,16 @@ function fmtPrice(p){
   return p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u202F') + ' €';
 }
 
+/* if a resized photo fails (some mobile browsers / networks), retry the original file once, then fall back to the icon */
+function photoFallback(img){
+  if (img.dataset.retried) { img.style.display = 'none'; return; }
+  img.dataset.retried = '1';
+  img.src = img.src.split('?')[0];
+}
 function renderDevices(){
   const t = i18n[currentLang];
   const grid = document.getElementById('catGrid');
-  grid.innerHTML = devices.map(d => {
+  grid.innerHTML = devices.map((d, i) => {
     const tagLabel = t['tag_' + d.tag];
     const feats = d.feat[currentLang];
     const shown = feats.slice(0, FEAT_CAP);
@@ -1024,7 +1029,7 @@ function renderDevices(){
         <div class="eq-img">
           <span class="eq-tag ${tagCls[d.tag]}">${tagLabel}</span>
           <span class="eq-icon eq-icon-fallback">${d.icon}</span>
-          ${img ? `<img class="eq-photo" src="${img}" alt="${d.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
+          ${img ? `<img class="eq-photo" src="${img}" alt="${d.name}" width="800" height="800" ${i < 6 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="photoFallback(this)">` : ''}
         </div>
         <div class="eq-body">
           <div class="eq-name">${d.name}</div>
@@ -1083,7 +1088,7 @@ function openDeviceModal(name){
   const safeName = name.replace(/'/g, "\\'");
   document.getElementById('devModalBody').innerHTML = `
     <div class="dm-head">
-      <div class="dm-icon"><span class="dm-emoji dm-emoji-fallback">${d.icon}</span>${img ? `<img class="dm-photo" src="${img}" alt="" onerror="this.style.display='none'">` : ''}</div>
+      <div class="dm-icon"><span class="dm-emoji dm-emoji-fallback">${d.icon}</span>${img ? `<img class="dm-photo" src="${img}" alt="" decoding="async" onerror="photoFallback(this)">` : ''}</div>
       <div>
         <span class="eq-tag ${tagCls[d.tag]}" style="position:static;display:inline-block;margin-bottom:8px">${tagLabel}</span>
         <div class="dm-name">${d.name}</div>
