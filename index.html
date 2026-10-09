@@ -367,7 +367,10 @@ nav.scrolled .burger span { background: var(--text); }
   #hero { grid-template-columns: 1fr; }
   .hero-logo-side { display: none; }
   #hero { min-height: auto; padding-top: 120px; padding-bottom: 80px; }
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-grid { grid-template-columns: 1fr; gap: 28px; margin-top: 0; }
+  /* stacked: heading first, then photo, team, stats and text */
+  .about-left, .about-right { display: contents; }
+  .about-head { order: -1; }
   .equipment-grid { grid-template-columns: 1fr 1fr; }
   .ba-grid { grid-template-columns: 1fr 1fr; }
   .reviews-grid { grid-template-columns: 1fr 1fr; }
@@ -588,7 +591,7 @@ nav.scrolled .burger span { background: var(--text); }
 
     <!-- RIGHT: heading + stats + text -->
     <div class="about-right">
-      <div>
+      <div class="about-head">
         <div class="section-eyebrow reveal" data-i18n="about_eyebrow">Par mums</div>
         <h2 class="section-title reveal reveal-delay-1"><em data-i18n="about_title">Uzticams partneris</em></h2>
         <p class="section-sub reveal reveal-delay-2" data-i18n="about_lead">Tiem, kuri novērtē inovācijas, kvalitāti un ilgtermiņa sadarbību.</p>
