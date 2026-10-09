@@ -126,9 +126,10 @@ section { padding: 100px 5vw; }
 .stat-desc { font-size: .72rem; color: var(--text-muted); letter-spacing: .06em; text-transform: uppercase; margin-top: 5px; }
 .about-intro { font-size: .975rem; color: var(--text-soft); line-height: 1.8; }
 .team-cards { display: flex; flex-direction: column; gap: 14px; }
-.team-card { display: flex; gap: 16px; align-items: flex-start; background: var(--off-white); border: 1.5px solid var(--mid); border-radius: var(--radius); padding: 16px 20px; transition: border-color .3s, box-shadow .3s, transform .3s; }
+.team-card { display: flex; gap: 22px; align-items: center; background: var(--off-white); border: 1.5px solid var(--mid); border-radius: var(--radius); padding: 18px 22px; transition: border-color .3s, box-shadow .3s, transform .3s; }
 .team-card:hover { border-color: var(--blue-mid); box-shadow: var(--shadow-sm); transform: translateX(4px); }
-.team-avatar { width: 54px; height: 54px; border-radius: 50%; flex-shrink: 0; object-fit: cover; border: 2px solid var(--mid); }
+.team-avatar { width: 104px; height: 104px; border-radius: 50%; flex-shrink: 0; object-fit: cover; border: 3px solid var(--white); box-shadow: 0 0 0 1.5px var(--mid), var(--shadow-sm); }
+@media (max-width: 768px) { .team-avatar { width: 80px; height: 80px; } .team-card { gap: 16px; padding: 16px 18px; } }
 .team-name { font-weight: 600; font-size: .95rem; color: var(--text); margin-bottom: 4px; }
 .team-role { font-size: .78rem; color: var(--text-muted); line-height: 1.55; }
 
@@ -157,7 +158,7 @@ section { padding: 100px 5vw; }
 .eq-icon-fallback { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
 .eq-photo { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; }
 .eq-tag { position: absolute; top: 14px; left: 14px; background: var(--blue); color: var(--white); font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; z-index: 2; }
-.eq-tag.teal { background: var(--teal); } .eq-tag.laser { background: #6b1a1a; } .eq-tag.micro { background: #8b1060; } .eq-tag.new { background: #c0392b; } .eq-tag.both { background: linear-gradient(120deg, var(--teal), var(--blue-mid)); }
+.eq-tag.teal { background: var(--teal); } .eq-tag.laser { background: #6b1a1a; } .eq-tag.micro { background: #8b1060; } .eq-tag.both { background: linear-gradient(120deg, var(--teal), var(--blue-mid)); }
 .eq-body { padding: 22px 24px; }
 .eq-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 500; color: var(--text); margin-bottom: 5px; }
 .eq-type { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--blue-mid); font-weight: 500; margin-bottom: 12px; }
@@ -455,7 +456,7 @@ nav.scrolled .burger span { background: var(--text); }
     <p class="hero-sub" data-i18n="hero_desc">Zemits ir starptautiski atzīts estētiskās kosmetoloģijas un skaistumkopšanas iekārtu zīmols, kas piedāvā mūsdienīgus risinājumus sejas un ķermeņa procedūrām. Ar vairāk nekā 15 gadu pieredzi nozarē, Zemits apvieno inovatīvas tehnoloģijas, profesionālu kvalitāti un praktisku atbalstu skaistumkopšanas speciālistiem visā pasaulē.</p>
     <div class="hero-actions">
       <a href="#equipment" class="btn-primary" data-i18n="hero_cta1">Aplūkot iekārtas →</a>
-      <a href="#seminars" class="btn-outline" data-i18n="hero_cta2">Semināri 2026</a>
+      <a href="#seminars" class="btn-outline" data-i18n="hero_cta2">Semināri</a>
     </div>
   </div>
   <div class="hero-logo-side">
@@ -511,7 +512,7 @@ nav.scrolled .burger span { background: var(--text); }
   <div class="equipment-grid">
     <div class="equipment-card reveal">
       <div class="eq-img-placeholder"><span class="eq-tag both" data-i18n="tag_both">Seja/ķermenis</span><span class="eq-icon">⚡</span></div>
-      <div class="eq-body"><div class="eq-name">Zemits Abigon Pro</div><div class="eq-type" data-i18n="abigon_type">Kavitācija un RF vakuums</div><ul class="eq-features"><li data-i18n="abigon_f1">Kavitācija</li><li data-i18n="abigon_f2">RF liftings</li><li data-i18n="abigon_f3">Vakuuma terapija</li><li data-i18n="abigon_f4">Tauku šūnu mazināšana</li></ul></div>
+      <div class="eq-body"><div class="eq-name">Zemits Abigon Pro</div><div class="eq-type" data-i18n="abigon_type">Ķermeņa un sejas kontūrēšanas sistēma</div><ul class="eq-features"><li data-i18n="abigon_f1">Vakuuma terapija</li><li data-i18n="abigon_f2">Multipolārs RF liftings</li><li data-i18n="abigon_f3">Bipolārs RF liftings</li><li data-i18n="abigon_f4">Tripolārs RF liftings</li><li data-i18n="abigon_f5">Kavitācija</li></ul></div>
     </div>
     <div class="equipment-card reveal reveal-delay-1">
       <div class="eq-img-placeholder"><span class="eq-tag" data-i18n="tag_body">Ķermenis</span><span class="eq-icon">💆</span></div>
@@ -531,7 +532,7 @@ nav.scrolled .burger span { background: var(--text); }
     </div>
     <div class="equipment-card reveal reveal-delay-2">
       <div class="eq-img-placeholder"><span class="eq-tag both" data-i18n="tag_both">Seja/ķermenis</span><span class="eq-icon">❄️</span></div>
-      <div class="eq-body"><div class="eq-name">Zemits Friolift</div><div class="eq-type" data-i18n="frio_type">Kontrasta ādas atjaunošanas sistēma</div><ul class="eq-features"><li data-i18n="frio_f1">Multipolārs, bipolārs un tripolārs RF liftings</li><li data-i18n="frio_f2">Krioterapija</li><li data-i18n="frio_f3">Sejas un ķermeņa nostiprināšana</li></ul></div>
+      <div class="eq-body"><div class="eq-name">Zemits Friolift</div><div class="eq-type" data-i18n="frio_type">Kontrastterapija ādas atjaunošanai sejai un ķermenim</div><ul class="eq-features"><li data-i18n="frio_f1">Multipolārs RF liftings</li><li data-i18n="frio_f2">Bipolārs RF liftings</li><li data-i18n="frio_f3">Tripolārs RF liftings</li><li data-i18n="frio_f4">Krioterapija</li></ul></div>
     </div>
     <div class="equipment-card reveal">
       <div class="eq-img-placeholder"><span class="eq-tag laser" data-i18n="tag_laser">Lāzers</span><span class="eq-icon">🔴</span></div>
@@ -542,8 +543,8 @@ nav.scrolled .burger span { background: var(--text); }
       <div class="eq-body"><div class="eq-name">Zemits Skyfrax Pro</div><div class="eq-type" data-i18n="skyfrax_type">Mikroadatu RF sistēma</div><ul class="eq-features"><li data-i18n="skyfrax_f1">Mikroadatu un RF kombinācija</li><li data-i18n="skyfrax_f2">Dabiskā kolagēna un elastīna veidošanās</li><li data-i18n="skyfrax_f3">Ādas elastības un stingrības uzlabošana</li><li data-i18n="skyfrax_f4">Akne rētu izlīdzināšana</li></ul></div>
     </div>
     <div class="equipment-card reveal reveal-delay-2">
-      <div class="eq-img-placeholder"><span class="eq-tag new">NEW</span><span class="eq-icon">🌊</span></div>
-      <div class="eq-body"><div class="eq-name">Zemits Endoluxx Pro</div><div class="eq-type" data-i18n="endo_type">Kompresijas mikrovibrācijas sistēma</div><ul class="eq-features"><li data-i18n="endo_f1">Inovatīva kompresijas mikrovibrāciju sistēma</li><li data-i18n="endo_f2">Piemērojama visam ķermenim un sejai</li><li data-i18n="endo_f3">Pretcelulīta terapija</li><li data-i18n="endo_f4">Muskuļu sasprindzinājuma atbrīvošana</li></ul></div>
+      <div class="eq-img-placeholder"><span class="eq-tag both" data-i18n="tag_both">Seja/ķermenis</span><span class="eq-icon">🌊</span></div>
+      <div class="eq-body"><div class="eq-name">Zemits Endoluxx Pro</div><div class="eq-type" data-i18n="endo_type">Endomasāžas iekārta ķermenim un sejai</div><ul class="eq-features"><li data-i18n="endo_f1">Endomasāža ar 3D rotējošām sfērām</li><li data-i18n="endo_f2">Uzlaboti uzgaļi sejai un ķermenim</li><li data-i18n="endo_f3">Dziļo audu masāža</li></ul></div>
     </div>
   </div>
   <div class="equipment-cta reveal">
@@ -567,16 +568,16 @@ nav.scrolled .burger span { background: var(--text); }
       </div>
       <div class="team-cards">
         <div class="team-card reveal reveal-delay-2">
-          <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/1.png?tr=w-160" alt="Dace" class="team-avatar"
-               onerror="this.outerHTML='<div style=\'width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1a4a8a,#2d6bbf);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:1.3rem;color:white;font-style:italic\'>D</div>'">
+          <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/1.png?tr=w-320" alt="Dace" class="team-avatar"
+               onerror="this.outerHTML='<div style=\'width:104px;height:104px;border-radius:50%;background:linear-gradient(135deg,#1a4a8a,#2d6bbf);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:2.2rem;color:white;font-style:italic\'>D</div>'">
           <div>
             <div class="team-name">Dace</div>
             <div class="team-role" data-i18n="dace_role">Zemits Skin Expert vadītāja. Skaistumkopšanas speciālists kosmetoloģijā, ārstniecības persona, Zemits apmācību trenere.</div>
           </div>
         </div>
         <div class="team-card reveal reveal-delay-3">
-          <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/2.png?tr=w-160" alt="Iveta" class="team-avatar"
-               onerror="this.outerHTML='<div style=\'width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1a4a8a,#2d6bbf);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:1.3rem;color:white;font-style:italic\'>I</div>'">
+          <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/Komanda/2.png?tr=w-320" alt="Iveta" class="team-avatar"
+               onerror="this.outerHTML='<div style=\'width:104px;height:104px;border-radius:50%;background:linear-gradient(135deg,#1a4a8a,#2d6bbf);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:2.2rem;color:white;font-style:italic\'>I</div>'">
           <div>
             <div class="team-name">Iveta</div>
             <div class="team-role" data-i18n="iveta_role">Zemits Skin Expert menedžere. Skaistumkopšanas speciālists kosmetoloģijā, ārstniecības persona, Zemits apmācību trenere.</div>
@@ -934,7 +935,7 @@ const i18n = {
     nav_about:'Par mums', nav_equipment:'Iekārtas', nav_seminars:'Apmācības', nav_reviews:'Atsauksmes', nav_contact:'Sazināties',
     hero_title:'Mūsdienīgas estētiskās kosmetoloģijas iekārtas', hero_subtitle:'Redzami rezultāti.',
     hero_desc:'Zemits ir starptautiski atzīts estētiskās kosmetoloģijas un skaistumkopšanas iekārtu zīmols, kas piedāvā mūsdienīgus risinājumus sejas un ķermeņa procedūrām. Ar vairāk nekā 15 gadu pieredzi nozarē, Zemits apvieno inovatīvas tehnoloģijas, profesionālu kvalitāti un praktisku atbalstu skaistumkopšanas speciālistiem visā pasaulē.',
-    hero_cta1:'Aplūkot iekārtas →', hero_cta2:'Semināri 2026',
+    hero_cta1:'Aplūkot iekārtas →', hero_cta2:'Semināri',
     about_eyebrow:'Par mums', about_title:'Uzticams partneris', about_lead:'Tiem, kuri novērtē inovācijas, kvalitāti un ilgtermiņa sadarbību.',
     stat1:'Gadi nozarē', stat2:'Apmācīti meistari', stat3:'Baltijas valstis',
     about_p1:'Zemits Skin Expert ir oficiālais Zemits pārstāvis Baltijas valstīs, piedāvājot profesionālas estētiskās kosmetoloģijas iekārtas skaistumkopšanas saloniem, estētikas klīnikām un speciālistiem.',
@@ -949,15 +950,15 @@ const i18n = {
     why5_title:'Starptautiska pieredze', why5_desc:'Zemits iekārtas tiek izmantotas visā Eiropā un ASV, un zīmols ir ieguvis profesionāļu uzticību visā pasaulē.',
     eq_eyebrow:'Iekārtas', eq_title:'iekārtu klāsts', eq_cta:'Pieprasīt piedāvājumu →',
     tag_body:'Ķermenis', tag_face:'Seja', tag_both:'Seja/ķermenis', tag_laser:'Lāzers', tag_micro:'Mikroadatas',
-    abigon_type:'Vakuums, RF un kavitācija', abigon_f1:'Kavitācija', abigon_f2:'RF liftings', abigon_f3:'Vakuuma terapija', abigon_f4:'Tauku šūnu mazināšana',
+    abigon_type:'Ķermeņa un sejas kontūrēšanas sistēma', abigon_f1:'Vakuuma terapija', abigon_f2:'Multipolārs RF liftings', abigon_f3:'Bipolārs RF liftings', abigon_f4:'Tripolārs RF liftings', abigon_f5:'Kavitācija',
     bionexis_type:'Ķermeņa kontūrēšanas sistēma', bionexis_f1:'Vakuuma terapija', bionexis_f2:'Pretcelulīta ruļļu masāža', bionexis_f3:'RF liftings', bionexis_f4:'LED terapija', bionexis_f5:'Kavitācija',
     leger_type:'Vakuuma sēžamvietu kopšana un pretcelulīta sistēma', leger_f1:'Vakuuma sēžamvietu formas uzlabošana', leger_f2:'Pretcelulīta terapija', leger_f3:'Limfodrenāža', leger_f4:'Ādas elastības uzlabošana',
     verstand_type:'8-in-1 ar HydroDiamond™ tehnoloģiju', verstand_f1:'HydroDiamond™ tehnoloģija', verstand_f2:'RF liftings', verstand_f3:'Elektroporācija', verstand_f4:'Vakuuma terapija · Krioterapija',
     eau_type:'Daudzfunkcionāla sejas platforma', eau_f1:'Hidrodermabrāzija', eau_f2:'RF liftings', eau_f3:'Skābekļa terapija', eau_f4:'Sonoforēze · Krioterapija',
-    frio_type:'Kontrasta ādas atjaunošanas sistēma', frio_f1:'Multipolārs, bipolārs un tripolārs RF liftings', frio_f2:'Krioterapija', frio_f3:'Sejas un ķermeņa nostiprināšana',
+    frio_type:'Kontrastterapija ādas atjaunošanai sejai un ķermenim', frio_f1:'Multipolārs RF liftings', frio_f2:'Bipolārs RF liftings', frio_f3:'Tripolārs RF liftings', frio_f4:'Krioterapija',
     ogma_type:'Nd:YAG lāzers tetovējumu noņemšanai', ogma_f1:'Tetovējumu noņemšana (melns, zils, sarkans u.c.)', ogma_f2:'Permanentā grima noņemšana', ogma_f3:'Hiperpigmentācijas ārstēšana', ogma_f4:'Oglekļa sejas pīlings',
     skyfrax_type:'Mikroadatu RF sistēma', skyfrax_f1:'Mikroadatu un RF kombinācija', skyfrax_f2:'Dabiskā kolagēna un elastīna veidošanās', skyfrax_f3:'Ādas elastības un stingrības uzlabošana', skyfrax_f4:'Akne rētu izlīdzināšana',
-    endo_type:'Kompresijas mikrovibrācijas sistēma', endo_f1:'Inovatīva kompresijas mikrovibrāciju sistēma', endo_f2:'Piemērojama visam ķermenim un sejai', endo_f3:'Pretcelulīta terapija', endo_f4:'Muskuļu sasprindzinājuma atbrīvošana',
+    endo_type:'Endomasāžas iekārta ķermenim un sejai', endo_f1:'Endomasāža ar 3D rotējošām sfērām', endo_f2:'Uzlaboti uzgaļi sejai un ķermenim', endo_f3:'Dziļo audu masāža',
     cta_title:'Vēlies apskatīt<br><em>visu iekārtu klāstu?</em>', cta_sub:'Pilnajā katalogā pieejama detalizēta informācija, tehniskās specifikācijas un procedūru protokoli katrai iekārtai.', cta_btn:'Skatīt visas iekārtas',
     trust_eyebrow:'Iegādājoties Zemits', trust_title:'Jūs saņemat <em>visu nepieciešamo</em>',
     trust1:'Apmācības', trust2:'24 mēneši garantija', trust3:'Atbalsts', trust4:'Serviss', trust5:'Instrukcija latviešu valodā', trust6:'CE Sertifikāts',
@@ -1007,7 +1008,7 @@ const i18n = {
     nav_about:'О нас', nav_equipment:'Аппараты', nav_seminars:'Обучение', nav_reviews:'Отзывы', nav_contact:'Связаться',
     hero_title:'Современное эстетическое косметологическое оборудование', hero_subtitle:'Видимые результаты.',
     hero_desc:'Zemits — международно признанный бренд эстетической косметологии и оборудования для индустрии красоты, предлагающий современные решения для процедур лица и тела. Более 15 лет опыта, инновационные технологии, профессиональное качество и практическая поддержка специалистов по всему миру.',
-    hero_cta1:'Смотреть аппараты →', hero_cta2:'Семинары 2026',
+    hero_cta1:'Смотреть аппараты →', hero_cta2:'Семинары',
     about_eyebrow:'О нас', about_title:'Надёжный партнёр', about_lead:'Для тех, кто ценит инновации, качество и долгосрочное сотрудничество.',
     stat1:'Лет в отрасли', stat2:'Обученных мастеров', stat3:'Страны Балтии',
     about_p1:'Zemits Skin Expert — официальный представитель Zemits в странах Балтии, предоставляющий профессиональное эстетическое оборудование для салонов красоты, эстетических клиник и специалистов.',
@@ -1022,15 +1023,15 @@ const i18n = {
     why5_title:'Международный опыт', why5_desc:'Продукты Zemits используются во многих странах Европы и США. Бренд завоевал доверие профессионалов по всему миру.',
     eq_eyebrow:'Оборудование', eq_title:'ассортимент аппаратов', eq_cta:'Запросить предложение →',
     tag_body:'Тело', tag_face:'Лицо', tag_both:'Лицо/тело', tag_laser:'Лазер', tag_micro:'Микроиглы',
-    abigon_type:'Ультразвуковая кавитация и RF-вакуум', abigon_f1:'Ультразвуковая кавитация', abigon_f2:'RF-тонизирование кожи', abigon_f3:'Вакуумный массаж', abigon_f4:'Уменьшение жировых клеток',
+    abigon_type:'Система контурирования тела и лица', abigon_f1:'Вакуумная терапия', abigon_f2:'Мультиполярный RF-лифтинг', abigon_f3:'Биполярный RF-лифтинг', abigon_f4:'Триполярный RF-лифтинг', abigon_f5:'Кавитация',
     bionexis_type:'Система контурирования тела', bionexis_f1:'Вакуумная терапия', bionexis_f2:'Антицеллюлитный роликовый массаж', bionexis_f3:'RF-лифтинг', bionexis_f4:'LED-терапия', bionexis_f5:'Кавитация',
     leger_type:'Вакуумная коррекция ягодиц и антицеллюлитная система', leger_f1:'Вакуумное улучшение формы ягодиц', leger_f2:'Антицеллюлитная терапия', leger_f3:'Лимфодренаж', leger_f4:'Улучшение эластичности кожи',
     verstand_type:'8-в-1 с технологией HydroDiamond™', verstand_f1:'Технология HydroDiamond™', verstand_f2:'RF-укрепление кожи', verstand_f3:'Неинвазивная мезотерапия', verstand_f4:'Вакуумный массаж · Криотерапия',
     eau_type:'Многофункциональная платформа для лица', eau_f1:'Гидродермабразия', eau_f2:'RF-подтяжка кожи', eau_f3:'Кислородная мезотерапия', eau_f4:'Фонофорез · Криотерапия',
-    frio_type:'Контрастная система омоложения кожи', frio_f1:'Мультиполярный, биполярный и триполярный RF-лифтинг', frio_f2:'Криотерапия', frio_f3:'Подтяжка лица и тела',
+    frio_type:'Контрастная терапия для омоложения кожи лица и тела', frio_f1:'Мультиполярный RF-лифтинг', frio_f2:'Биполярный RF-лифтинг', frio_f3:'Триполярный RF-лифтинг', frio_f4:'Криотерапия',
     ogma_type:'Nd:YAG лазер для удаления татуировок', ogma_f1:'Удаление татуировок (чёрный, синий, красный и др.)', ogma_f2:'Удаление перманентного макияжа', ogma_f3:'Лечение гиперпигментации', ogma_f4:'Карбоновый пилинг',
     skyfrax_type:'RF-система с микроиглами', skyfrax_f1:'Комбинация микроигл и RF', skyfrax_f2:'Выработка натурального коллагена и эластина', skyfrax_f3:'Улучшение эластичности и упругости кожи', skyfrax_f4:'Выравнивание текстуры и шрамов от акне',
-    endo_type:'Система компрессионной микровибрации', endo_f1:'Инновационная компрессионная система микровибраций', endo_f2:'Применяется для всего тела и лица', endo_f3:'Антицеллюлитная терапия', endo_f4:'Снятие мышечного напряжения',
+    endo_type:'Аппарат эндомассажа для тела и лица', endo_f1:'Эндомассаж с 3D-вращающимися сферами', endo_f2:'Улучшенные насадки для лица и тела', endo_f3:'Глубокий массаж тканей',
     cta_title:'Хотите ознакомиться<br><em>со всем ассортиментом?</em>', cta_sub:'В нашем полном каталоге аппаратов вы найдёте подробную информацию, технические характеристики и протоколы процедур для каждого устройства.', cta_btn:'Смотреть все аппараты',
     trust_eyebrow:'При покупке Zemits', trust_title:'Вы получаете <em>всё необходимое</em>',
     trust1:'Обучение', trust2:'Гарантия 24 месяца', trust3:'Поддержка', trust4:'Сервис', trust5:'Инструкция на латышском языке', trust6:'CE Сертификат',
@@ -1080,7 +1081,7 @@ const i18n = {
     nav_about:'About us', nav_equipment:'Devices', nav_seminars:'Training', nav_reviews:'Reviews', nav_contact:'Contact us',
     hero_title:'Advanced aesthetic cosmetology equipment', hero_subtitle:'Visible results.',
     hero_desc:'Zemits is an internationally recognised brand of aesthetic cosmetology and beauty equipment, offering cutting-edge solutions for facial and body treatments. With over 15 years of industry experience, Zemits combines innovative technology, professional quality, and practical support for beauty specialists worldwide.',
-    hero_cta1:'Explore devices →', hero_cta2:'Seminars 2026',
+    hero_cta1:'Explore devices →', hero_cta2:'Seminars',
     about_eyebrow:'About us', about_title:'A trusted partner', about_lead:'For those who value innovation, quality, and long-term collaboration.',
     stat1:'Years in the industry', stat2:'Trained specialists', stat3:'Baltic countries',
     about_p1:'Zemits Skin Expert is the official Zemits representative in the Baltic states, offering professional aesthetic cosmetology equipment to beauty salons, aesthetic clinics, and individual specialists.',
@@ -1095,15 +1096,15 @@ const i18n = {
     why5_title:'International expertise', why5_desc:'Zemits products are used across Europe and the United States, and the brand has earned the trust of professionals worldwide.',
     eq_eyebrow:'Equipment', eq_title:'device range', eq_cta:'Request a quote →',
     tag_body:'Body', tag_face:'Face', tag_both:'Face/body', tag_laser:'Laser', tag_micro:'Microneedling',
-    abigon_type:'Ultrasonic cavitation & RF vacuum', abigon_f1:'Ultrasonic cavitation', abigon_f2:'RF skin toning', abigon_f3:'Vacuum massage', abigon_f4:'Fat cell reduction',
+    abigon_type:'Body & face contouring system', abigon_f1:'Vacuum therapy', abigon_f2:'Multipolar RF lifting', abigon_f3:'Bipolar RF lifting', abigon_f4:'Tripolar RF lifting', abigon_f5:'Cavitation',
     bionexis_type:'Body contouring system', bionexis_f1:'Vacuum therapy', bionexis_f2:'Anti-cellulite roller massage', bionexis_f3:'RF lifting', bionexis_f4:'LED therapy', bionexis_f5:'Cavitation',
     leger_type:'Vacuum buttock enhancement & anti-cellulite system', leger_f1:'Vacuum buttock shaping', leger_f2:'Anti-cellulite therapy', leger_f3:'Lymphatic drainage', leger_f4:'Improved skin elasticity',
     verstand_type:'8-in-1 with HydroDiamond™ technology', verstand_f1:'HydroDiamond™ technology', verstand_f2:'RF skin tightening', verstand_f3:'Non-invasive mesotherapy', verstand_f4:'Vacuum massage · Cryotherapy',
     eau_type:'Multifunctional facial platform', eau_f1:'Hydrodermabrasion', eau_f2:'RF skin tightening', eau_f3:'Oxygen mesotherapy', eau_f4:'Phonophoresis · Cryotherapy',
-    frio_type:'Contrast skin rejuvenation system', frio_f1:'Multipolar, bipolar and tripolar RF lifting', frio_f2:'Cryotherapy', frio_f3:'Face and body tightening',
+    frio_type:'Contrast therapy for face and body skin rejuvenation', frio_f1:'Multipolar RF lifting', frio_f2:'Bipolar RF lifting', frio_f3:'Tripolar RF lifting', frio_f4:'Cryotherapy',
     ogma_type:'Nd:YAG laser for tattoo removal', ogma_f1:'Tattoo removal (black, blue, red, etc.)', ogma_f2:'Permanent makeup removal', ogma_f3:'Hyperpigmentation treatment', ogma_f4:'Carbon peel facial',
     skyfrax_type:'Microneedling RF system', skyfrax_f1:'Microneedling & RF combination', skyfrax_f2:'Natural collagen & elastin production', skyfrax_f3:'Improved skin elasticity & firmness', skyfrax_f4:'Acne scar & texture smoothing',
-    endo_type:'Compression microvibration system', endo_f1:'Innovative compression microvibration system', endo_f2:'Suitable for full body and face', endo_f3:'Anti-cellulite therapy', endo_f4:'Muscle tension relief',
+    endo_type:'Endo-massage device for body & face', endo_f1:'Endo-massage with 3D rotating spheres', endo_f2:'Advanced attachments for face and body', endo_f3:'Deep tissue massage',
     cta_title:'Want to explore<br><em>the full range?</em>', cta_sub:'Our complete device catalogue includes detailed information, technical specifications, and treatment protocols for every device.', cta_btn:'View all devices',
     trust_eyebrow:'When you purchase Zemits', trust_title:'You receive <em>everything you need</em>',
     trust1:'Training', trust2:'24-month warranty', trust3:'Support', trust4:'Service', trust5:'Manual in Latvian', trust6:'CE Certificate',
