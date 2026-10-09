@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zemits Skin Expert — Aparātu klāsts</title>
-<meta name="description" content="Zemits iekārtu katalogs 2026: profesionālas estētiskās kosmetoloģijas iekārtas sejai un ķermenim ar cenām, apmācībām, 24 mēnešu garantiju un servisu Latvijā.">
+<meta name="description" content="Zemits iekārtu katalogs: profesionālas estētiskās kosmetoloģijas iekārtas sejai un ķermenim ar cenām, apmācībām, 24 mēnešu garantiju un servisu Latvijā.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a4a8a'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-style='italic' fill='%23ffffff' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -65,7 +65,20 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 16px 5v
 #cat-hero { min-height: 56vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; padding: 150px 5vw 80px; }
 .cat-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(135deg, #0d2040 0%, #1a4a8a 45%, #0a3060 100%); }
 .cat-hero-dots { position: absolute; inset: 0; z-index: 1; opacity: .06; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.8) 1px, transparent 0); background-size: 32px 32px; }
+.cat-hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
 .cat-hero-inner { position: relative; z-index: 2; max-width: 760px; }
+/* hero photo — lightweight: one-time entrance only, transform/opacity only (GPU), no blur filters, no infinite loops */
+.cat-hero-media { position: relative; width: 100%; max-width: 440px; aspect-ratio: 4 / 5; justify-self: end; contain: layout style; }
+.cat-hero-media::before { content: ''; position: absolute; inset: -16px; border-radius: 40px; border: 1px solid rgba(126,203,255,.28); pointer-events: none; }
+.cat-hero-media::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(closest-side at 72% 78%, rgba(77,166,255,.38), transparent); transform: scale(1.35); }
+.cat-hero-photo { position: relative; height: 100%; border-radius: 28px; overflow: hidden; background: linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.22); box-shadow: 0 30px 70px rgba(3,10,30,.4); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: rgba(255,255,255,.45); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; animation: heroIn .9s .2s cubic-bezier(.2,.7,.2,1) both; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.cat-hero-photo::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.16) 50%, transparent 65%); transform: translateX(-100%); animation: heroSheen 1.4s 1s ease-out forwards; }
+.cat-hero-photo svg { width: 54px; height: 54px; stroke: rgba(255,255,255,.42); fill: none; stroke-width: 1.4; }
+.cat-hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (hover: hover) { .cat-hero-media:hover .cat-hero-photo { transform: translateY(-6px); } }
+@keyframes heroIn { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes heroSheen { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .cat-hero-photo, .cat-hero-photo::after { animation: none; transition: none; } .cat-hero-photo::after { display: none; } }
 .cat-eyebrow { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-light); font-weight: 500; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
 .cat-eyebrow::before { content: ''; width: 28px; height: 1.5px; background: var(--blue-light); }
 .cat-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem,5vw,4rem); font-weight: 400; line-height: 1.1; color: var(--white); margin-bottom: 18px; }
@@ -205,6 +218,9 @@ nav .burger span { background: var(--text); }
 /* ── RESPONSIVE ── */
 @media (max-width: 1100px) { .trust-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 1024px) {
+  .cat-hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .cat-hero-media { justify-self: stretch; max-width: none; aspect-ratio: 16 / 10; }
+  .cat-hero-media::before { inset: -8px; border-radius: 34px; }
   .cat-grid { grid-template-columns: 1fr 1fr; }
   .contacts-grid { grid-template-columns: 1fr; gap: 40px; }
 }
@@ -272,8 +288,9 @@ nav .burger span { background: var(--text); }
 <!-- CATALOG HERO -->
 <section id="cat-hero">
   <div class="cat-hero-bg"></div><div class="cat-hero-dots"></div>
+  <div class="cat-hero-grid">
   <div class="cat-hero-inner">
-    <div class="cat-eyebrow" data-i18n="cat_eyebrow">Aparātu katalogs 2026</div>
+    <div class="cat-eyebrow" data-i18n="cat_eyebrow">Aparātu katalogs</div>
     <h1 class="cat-hero-title">Zemits <em data-i18n="cat_title">iekārtu klāsts</em></h1>
     <p class="cat-hero-sub" data-i18n="cat_sub">Profesionālas estētiskās kosmetoloģijas iekārtas sejas un ķermeņa procedūrām. Katra iekārta tiek piegādāta ar apmācībām, garantiju un tehnisko atbalstu.</p>
     <div class="cat-hero-meta">
@@ -281,6 +298,19 @@ nav .burger span { background: var(--text); }
       <div class="cat-hero-stat"><div class="n">24</div><div class="l" data-i18n="meta_warranty">Mēneši garantija</div></div>
       <div class="cat-hero-stat"><div class="n"><img src="https://ik.imagekit.io/xwsgpirygo/Zemits/ce%20sertificatiaon.png?tr=h-80" alt="CE" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)"></div><div class="l" data-i18n="meta_cert">Sertifikācija</div></div>
     </div>
+  </div>
+  <div class="cat-hero-media">
+    <div class="cat-hero-photo">
+      <!-- FOTO: ievietojiet šeit (aizstājot ikonu un "Foto"), piemēram:
+      <img src="https://ik.imagekit.io/xwsgpirygo/Zemits/FAILS.jpg?tr=w-900,f-auto,q-80"
+           srcset="https://ik.imagekit.io/xwsgpirygo/Zemits/FAILS.jpg?tr=w-600,f-auto,q-80 600w,
+                   https://ik.imagekit.io/xwsgpirygo/Zemits/FAILS.jpg?tr=w-900,f-auto,q-80 900w"
+           sizes="(max-width: 1024px) 90vw, 440px" width="880" height="1100"
+           alt="Zemits iekārtas" fetchpriority="high" decoding="async"> -->
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.8"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span>Foto</span>
+    </div>
+  </div>
   </div>
 </section>
 
@@ -366,7 +396,7 @@ const i18n = {
     banner_text:'Mēs neizmantojam trešo pušu analītiku un izsekošanas sīkdatnes — jūsu pārlūkā tiek saglabāti tikai vietnes iestatījumi (piem., valoda). <a href="#" onclick="openPrivacy();return false;">Privātuma politika</a>',
     privacy_body:'Šī tīmekļa vietne izmanto tikai tehniski nepieciešamās funkcijas saziņai vietnē WhatsApp. Mēs <strong>neizmantojam</strong> trešo pušu analītiku un nenododam jūsu datus trešajām personām.<br><br>Iesniedzot pieteikumu, jūs piekrītat, ka jūsu kontaktinformācija tiks izmantota tikai saziņai ar «Zemits Skin Expert» speciālistiem.',
     nav_home:'Sākumlapa', nav_equipment:'Iekārtas', nav_contact:'Sazināties',
-    cat_eyebrow:'Aparātu katalogs 2026', cat_title:'iekārtu klāsts',
+    cat_eyebrow:'Aparātu katalogs', cat_title:'iekārtu klāsts',
     cat_sub:'Profesionālas estētiskās kosmetoloģijas iekārtas sejas un ķermeņa procedūrām. Katra iekārta tiek piegādāta ar apmācībām, garantiju un tehnisko atbalstu.',
     meta_devices:'Iekārtas klāstā', meta_warranty:'Mēneši garantija', meta_cert:'Sertifikācija',
     trust_eyebrow:'Iegādājoties Zemits', trust_title:'Jūs saņemat <em>visu nepieciešamo</em>',
@@ -395,7 +425,7 @@ const i18n = {
     banner_text:'Мы не используем стороннюю аналитику и отслеживающие cookie — в вашем браузере сохраняются только настройки сайта (например, язык). <a href="#" onclick="openPrivacy();return false;">Политика конфиденциальности</a>',
     privacy_body:'Этот сайт использует только технически необходимые функции для связи через WhatsApp. Мы <strong>не используем</strong> сторонние системы аналитики и не передаём ваши данные третьим лицам.<br><br>Отправляя заявку, вы соглашаетесь на использование ваших контактных данных исключительно для связи со специалистами Zemits Skin Expert.',
     nav_home:'Главная', nav_equipment:'Аппараты', nav_contact:'Связаться',
-    cat_eyebrow:'Каталог оборудования 2026', cat_title:'ассортимент аппаратов',
+    cat_eyebrow:'Каталог оборудования', cat_title:'ассортимент аппаратов',
     cat_sub:'Профессиональное эстетическое косметологическое оборудование для процедур лица и тела. Каждый аппарат поставляется с обучением, гарантией и технической поддержкой.',
     meta_devices:'Аппаратов в каталоге', meta_warranty:'Месяца гарантии', meta_cert:'Сертификация',
     trust_eyebrow:'При покупке Zemits', trust_title:'Вы получаете <em>всё необходимое</em>',
@@ -422,7 +452,7 @@ const i18n = {
     banner_text:'We use no third-party analytics or tracking cookies — your browser only stores site settings (such as language). <a href="#" onclick="openPrivacy();return false;">Privacy Policy</a>',
     privacy_body:'This website uses only technically necessary functions for communication via WhatsApp. We do <strong>not use</strong> third-party analytics and do not share your data with third parties.<br><br>By submitting a request, you agree that your contact details will be used solely for communication with Zemits Skin Expert specialists.',
     nav_home:'Home', nav_equipment:'Devices', nav_contact:'Contact us',
-    cat_eyebrow:'Equipment catalogue 2026', cat_title:'device range',
+    cat_eyebrow:'Equipment catalogue', cat_title:'device range',
     cat_sub:'Professional aesthetic cosmetology equipment for facial and body treatments. Every device comes with training, warranty, and technical support.',
     meta_devices:'Devices in range', meta_warranty:'Months warranty', meta_cert:'Certification',
     trust_eyebrow:'When you purchase Zemits', trust_title:'You receive <em>everything you need</em>',
@@ -474,9 +504,9 @@ const devices = [
   { name:'Zemits Endoluxx Pro', price:13000, tag:'both', icon:'🌊',
     type:{lv:'Endomasāžas iekārta ķermenim un sejai', ru:'Аппарат эндомассажа для тела и лица', en:'Endo-massage device for body & face'},
     feat:{
-      lv:['Endomasāža ar rotējošām sfērām','Mikrovibrācijas un kompresijas efekts'],
-      ru:['Эндомассаж с вращающимися сферами','Эффект микровибрации и компрессии'],
-      en:['Endo-massage with rotating spheres','Microvibration and compression effect']
+      lv:['Endomasāža ar 3D rotējošām sfērām','Uzlaboti uzgaļi sejai un ķermenim','Dziļo audu masāža'],
+      ru:['Эндомассаж с 3D-вращающимися сферами','Улучшенные насадки для лица и тела','Глубокий массаж тканей'],
+      en:['Endo-massage with 3D rotating spheres','Advanced attachments for face and body','Deep tissue massage']
     }},
   { name:'Zemits Bionexis Lite', price:11000, tag:'body', icon:'💆',
     type:{lv:'Ķermeņa kontūrēšanas sistēma', ru:'Система контурирования тела', en:'Body contouring system'},
@@ -500,7 +530,7 @@ const devices = [
       en:['In-depth skin diagnostics']
     }},
   { name:'Zemits Friolift', price:3200, tag:'both', icon:'❄️',
-    type:{lv:'Kontrasta ādas atjaunošana · RF + krio', ru:'Контрастное омоложение кожи · RF + крио', en:'Contrast skin rejuvenation · RF + cryo'},
+    type:{lv:'Kontrastterapija ādas atjaunošanai sejai un ķermenim', ru:'Контрастная терапия для омоложения кожи лица и тела', en:'Contrast therapy for face and body skin rejuvenation'},
     feat:{
       lv:['Multipolārs RF liftings','Bipolārs RF liftings','Tripolārs RF liftings','Krioterapija'],
       ru:['Мультиполярный RF-лифтинг','Биполярный RF-лифтинг','Триполярный RF-лифтинг','Криотерапия'],
@@ -513,26 +543,33 @@ const devices = [
       ru:['RF-лифтинг','Электропорация','Электропорация (периорбитальная зона)','Гидродермабразия','Ультразвуковой пилинг','Вакуумная терапия','Криотерапия','Кислородная терапия'],
       en:['RF lifting','Electroporation','Electroporation (periorbital area)','Hydrodermabrasion','Ultrasonic scrubber','Vacuum therapy','Cold therapy','Oxygen therapy']
     }},
+  { name:'Zemits OxiVelour Pro', price:3200, tag:'face', icon:'💨',
+    type:{lv:'Skābekļa terapijas un skābekļa infūzijas ierīce', ru:'Аппарат кислородной терапии и кислородной инфузии', en:'Oxygen therapy & oxygen infusion device'},
+    feat:{
+      lv:['Komplektā ietilpst: aerogrāfs un skābekļa kupols','Procedūra tiek papildināta ar aktīvajām vielām'],
+      ru:['В комплекте: аэрограф и кислородный купол','Процедура дополняется активными веществами'],
+      en:['Included: airbrush and oxygen dome','Treatment enhanced with active ingredients']
+    }},
   { name:'Zemits Celluspice Pro', price:3000, tag:'both', icon:'🌡️',
     type:{lv:'Vakuuma–termomasāžas iekārta', ru:'Вакуумно-термомассажный аппарат', en:'Vacuum thermo-massage device'},
     feat:{
-      lv:['Vakuuma–termomasāža'],
-      ru:['Вакуумно-термомассаж'],
-      en:['Vacuum thermo-massage']
+      lv:['Divkārša iedarbība cīņā ar tauku nogulsnējumiem','Ieteicama pēc kriolipolīzes vai kavitācijas'],
+      ru:['Двойное воздействие в борьбе с жировыми отложениями','Рекомендуется после криолиполиза или кавитации'],
+      en:['Dual action against fat deposits','Recommended after cryolipolysis or cavitation']
     }},
-  { name:'Zemits Evoplasma', price:3000, tag:'face', icon:'⚡',
+  { name:'Zemits EvoPlasm', price:3000, tag:'face', icon:'⚡',
     type:{lv:'Aukstās plazmas iekārta', ru:'Аппарат холодной плазмы', en:'Cold plasma device'},
     feat:{
-      lv:['Aukstās plazmas tehnoloģija'],
-      ru:['Технология холодной плазмы'],
-      en:['Cold plasma technology']
+      lv:['Aukstā plazma: universāls papildinājums jebkurai procedūrai','Nodrošinot rezultātus, kas ir redzami jau pēc pirmās vizītes'],
+      ru:['Холодная плазма: универсальное дополнение к любой процедуре','Результат заметен уже после первого визита'],
+      en:['Cold plasma: a universal add-on to any treatment','Results visible after the very first visit']
     }},
   { name:'Zemits Abigon Pro', price:2900, tag:'both', icon:'🌀',
-    type:{lv:'Ķermeņa un sejas RF sistēma', ru:'RF-система для тела и лица', en:'Body & face RF system'},
+    type:{lv:'Ķermeņa un sejas kontūrēšanas sistēma', ru:'Система контурирования тела и лица', en:'Body & face contouring system'},
     feat:{
-      lv:['Vakuuma terapija','RF liftings ķermenim un sejai','Kavitācija'],
-      ru:['Вакуумная терапия','RF-лифтинг для тела и лица','Кавитация'],
-      en:['Vacuum therapy','RF lifting for body and face','Cavitation']
+      lv:['Vakuuma terapija','Multipolārs RF liftings','Bipolārs RF liftings','Tripolārs RF liftings','Kavitācija'],
+      ru:['Вакуумная терапия','Мультиполярный RF-лифтинг','Биполярный RF-лифтинг','Триполярный RF-лифтинг','Кавитация'],
+      en:['Vacuum therapy','Multipolar RF lifting','Bipolar RF lifting','Tripolar RF lifting','Cavitation']
     }},
   { name:'Zemits Verstand Pro', price:2700, tag:'face', icon:'✨',
     type:{lv:'Daudzfunkcionāla sejas platforma', ru:'Многофункциональная платформа для лица', en:'Multifunctional facial platform'},
@@ -562,12 +599,19 @@ const devices = [
       ru:['Гидродермабразия','Кислородная терапия','Криотерапия'],
       en:['Hydrodermabrasion','Oxygen therapy','Cold therapy']
     }},
+  { name:'Zemits Demeter Pro', price:2200, tag:'body', icon:'🦵',
+    type:{lv:'Presoterapija — limfodrenāžas iekārta', ru:'Прессотерапия — аппарат лимфодренажа', en:'Pressotherapy — lymphatic drainage'},
+    feat:{
+      lv:['Profesionāla limfodrenāžas ierīce ar 44 kamerām','Gaisa spiediena intensitāti var regulēt četros līmeņos (120 līdz 240 mm Hg)','Kostīms ir izgatavots no izturīga materiāla, un tam ir universāls izmērs','Maksimālais klienta svars līdz 200 kg','Apstrādes zonas — kājas, vēders, sēžamvieta un rokas'],
+      ru:['Профессиональный аппарат лимфодренажа с 44 камерами','Интенсивность давления регулируется на четырёх уровнях (от 120 до 240 мм рт. ст.)','Костюм из прочного материала, универсальный размер','Максимальный вес клиента — до 200 кг','Зоны воздействия — ноги, живот, ягодицы и руки'],
+      en:['Professional lymphatic drainage device with 44 chambers','Air pressure adjustable in four levels (120 to 240 mmHg)','Durable suit material, universal size','Maximum client weight up to 200 kg','Treatment zones — legs, abdomen, buttocks and arms']
+    }},
   { name:'Zemits Sisley 2.0', price:2000, tag:'body', icon:'🦵',
     type:{lv:'Presoterapija — limfodrenāžas iekārta', ru:'Прессотерапия — аппарат лимфодренажа', en:'Pressotherapy — lymphatic drainage'},
     feat:{
-      lv:['Presoterapija','Limfodrenāža'],
-      ru:['Прессотерапия','Лимфодренаж'],
-      en:['Pressotherapy','Lymphatic drainage']
+      lv:['Profesionāla limfodrenāžas ierīce ar 24 kamerām','Gaisa spiediena intensitāti var regulēt četros līmeņos (120 līdz 240 mm Hg)','Kostīms ir izgatavots no izturīga materiāla, un tam ir universāls izmērs','Maksimālais klienta svars līdz 200 kg','Apstrādes zonas — kājas, vēders, sēžamvieta un rokas'],
+      ru:['Профессиональный аппарат лимфодренажа с 24 камерами','Интенсивность давления регулируется на четырёх уровнях (от 120 до 240 мм рт. ст.)','Костюм из прочного материала, универсальный размер','Максимальный вес клиента — до 200 кг','Зоны воздействия — ноги, живот, ягодицы и руки'],
+      en:['Professional lymphatic drainage device with 24 chambers','Air pressure adjustable in four levels (120 to 240 mmHg)','Durable suit material, universal size','Maximum client weight up to 200 kg','Treatment zones — legs, abdomen, buttocks and arms']
     }},
   { name:'Zemits Leger 2.0', price:1000, tag:'both', icon:'🫧',
     type:{lv:'Vakuuma terapijas sistēma', ru:'Система вакуумной терапии', en:'Vacuum therapy system'},
@@ -586,9 +630,9 @@ const devices = [
   { name:'Zemits Adrinox 2.0', price:950, tag:'both', icon:'🔌',
     type:{lv:'Mikrostrāvas terapija', ru:'Микротоковая терапия', en:'Microcurrent therapy'},
     feat:{
-      lv:['Mikrostrāvas terapija','Trīs pāri manipulas','Viens pāris cimdi'],
-      ru:['Микротоковая терапия','Три пары манипул','Одна пара перчаток'],
-      en:['Microcurrent therapy','Three pairs of probes','Conductive glove set']
+      lv:['Trīs pāri manipulas','Viens pāris cimdi'],
+      ru:['Три пары манипул','Одна пара перчаток'],
+      en:['Three pairs of probes','Conductive glove set']
     }},
   { name:'Zemits Klein El', price:750, tag:'both', icon:'💉',
     type:{lv:'Bezadatu mezoterapija (elektroporācija)', ru:'Безыгольная мезотерапия (электропорация)', en:'No-needle mesotherapy (electroporation)'},
@@ -621,9 +665,9 @@ const devices = [
   { name:'Zemits PrimeCart', price:170, from:true, tag:'acc', icon:'🛒',
     type:{lv:'Procedūru ratiņi · vairāki izmēri', ru:'Косметологическая тележка · несколько размеров', en:'Treatment trolley · several sizes'},
     feat:{
-      lv:['Stabils statīvs iekārtām','Pārvietojami riteņi','Atvērti plaukti aksesuāriem'],
-      ru:['Устойчивая стойка для аппаратов','Колёса для перемещения','Открытые полки для аксессуаров'],
-      en:['Stable equipment stand','Mobility casters','Open shelves for accessories']
+      lv:['Stabils statīvs iekārtām','Pārvietojams, ar ritenīšiem','Atvērti plaukti aksesuāriem'],
+      ru:['Устойчивая стойка для аппаратов','Мобильная, на колёсиках','Открытые полки для аксессуаров'],
+      en:['Stable equipment stand','Mobile, on casters','Open shelves for accessories']
     }}
 ];
 
@@ -654,43 +698,43 @@ const deviceInfo = {
         treats:['Improved skin elasticity and firmness','Acne scars and enlarged pores','Fine lines and skin texture','Reduced appearance of stretch marks']}
   },
   'Zemits Endoluxx Pro': {
-    lv:{desc:'Endomasāžas aparāts ķermenim un sejai ar rotējošām sfērām, kas rada mikrovibrācijas un kompresijas efektu, uzlabojot mikrocirkulāciju un audu tonusu.',
+    lv:{desc:'Endomasāžas aparāts ķermenim un sejai ar rotējošām sfērām, kas rada mikrovibrācijas un kompresijas efektu, uzlabojot mikrocirkulāciju, audu tonusu, limfas cirkulāciju, mazinātu celulītu un liekos taukaudus, novērstu toksīnu un šķidruma uzkrāšanos.',
         treats:['Celulīta un ķermeņa kontūru korekcija','Limfas aizplūšana un pietūkuma mazināšana','Muskuļu sasprindzinājuma atbrīvošana','Ādas tonusa un elastības uzlabošana']},
-    ru:{desc:'Аппарат эндомассажа для тела и лица с вращающимися сферами: создаёт микровибрацию и компрессию, улучшая микроциркуляцию и тонус тканей.',
+    ru:{desc:'Аппарат эндомассажа для тела и лица с вращающимися сферами, создающими эффект микровибрации и компрессии. Улучшает микроциркуляцию, тонус тканей и лимфоток, помогает уменьшить целлюлит и лишние жировые отложения, предотвращает накопление токсинов и жидкости.',
         treats:['Коррекция целлюлита и контуров тела','Лимфоотток и уменьшение отёчности','Снятие мышечного напряжения','Улучшение тонуса и эластичности кожи']},
-    en:{desc:'Endo-massage device for body and face with rotating spheres that create microvibration and compression, improving microcirculation and tissue tone.',
+    en:{desc:'Endo-massage device for body and face with rotating spheres that create a microvibration and compression effect. It improves microcirculation, tissue tone and lymph flow, helps reduce cellulite and excess fat, and prevents the build-up of toxins and fluid.',
         treats:['Cellulite and body contour correction','Lymphatic drainage and reduced puffiness','Muscle tension relief','Improved skin tone and elasticity']}
   },
   'Zemits Bionexis Lite': {
-    lv:{desc:'Daudzfunkcionāla ķermeņa kontūrēšanas sistēma, kas vienā aparātā apvieno vakuumu, RF, kavitāciju, ruļļu masāžu un LED, ļaujot veidot pilnvērtīgus pretcelulīta protokolus.',
+    lv:{desc:'Daudzfunkcionāla ķermeņa kontūrēšanas sistēma, kas vienā aparātā apvieno aparātmetodes izciliem rezultātiem ķermeņa kontūru korekcijai un svara samazināšanai, limfas cirkulācijas aktivizēšanai un tonusa uzlabošanai.',
         treats:['Celulīts un lokāli tauku uzkrājumi','Ķermeņa kontūru veidošana','Ādas stingrība un elastība','Limfodrenāža un mikrocirkulācija']},
-    ru:{desc:'Многофункциональная система контурирования тела: объединяет вакуум, RF, кавитацию, роликовый массаж и LED для полноценных антицеллюлитных протоколов.',
+    ru:{desc:'Многофункциональная система контурирования тела, объединяющая в одном аппарате несколько аппаратных методик для выдающихся результатов в коррекции контуров тела и снижении веса, активации лимфообращения и улучшении тонуса.',
         treats:['Целлюлит и локальные жировые отложения','Формирование контуров тела','Упругость и эластичность кожи','Лимфодренаж и микроциркуляция']},
-    en:{desc:'Multifunctional body contouring system combining vacuum, RF, cavitation, roller massage, and LED for complete anti-cellulite protocols.',
+    en:{desc:'A multifunctional body contouring system that combines several device methods in one unit for outstanding results in body contour correction and weight reduction, lymphatic activation and improved tone.',
         treats:['Cellulite and localized fat deposits','Body contour shaping','Skin firmness and elasticity','Lymphatic drainage and microcirculation']}
   },
   'Zemits Verstand HD Pro': {
-    lv:{desc:'Augstākā līmeņa sejas platforma ar 8 tehnoloģijām un patentēto HydroDiamond™ procedūru. Viena iekārta aizstāj vairākus monofunkcionālus aparātus un ļauj veidot individuālus sejas protokolus.',
+    lv:{desc:'Inovatīva sejas platforma ar 8 tehnoloģijām un patentēto HydroDiamond™ procedūru. Viena iekārta ļauj veidot individuālus sejas protokolus, lai uzlabotu ādas kvalitāti un risinātu dažādas ādas problēmas.',
         treats:['Novecošanās pazīmes un ādas ļenganums','Aizsērējušas poras un komedoni','Dehidratācija un blāva āda','Pigmentācija un nevienmērīgs tonis']},
-    ru:{desc:'Топовая платформа для лица с 8 технологиями и запатентованной процедурой HydroDiamond™. Один аппарат заменяет несколько монофункциональных и позволяет строить индивидуальные протоколы.',
+    ru:{desc:'Инновационная платформа для лица с 8 технологиями и запатентованной процедурой HydroDiamond™. Один аппарат позволяет создавать индивидуальные протоколы для лица, чтобы улучшить качество кожи и решать различные её проблемы.',
         treats:['Признаки старения и дряблость кожи','Забитые поры и комедоны','Обезвоженность и тусклость кожи','Пигментация и неровный тон']},
-    en:{desc:'Top-tier facial platform with 8 technologies and the patented HydroDiamond™ treatment. One device replaces several single-function machines and enables fully bespoke facial protocols.',
+    en:{desc:'An innovative facial platform with 8 technologies and the patented HydroDiamond™ treatment. One device lets you build individual facial protocols to improve skin quality and address a range of skin concerns.',
         treats:['Signs of aging and skin laxity','Clogged pores and comedones','Dehydration and dull skin','Pigmentation and uneven tone']}
   },
   'Zemits Veraface': {
-    lv:{desc:'Profesionāls ādas analizators, kas vizualizē ādas stāvokli (poras, grumbas, pigmentāciju, mitrumu), palīdz izvēlēties procedūru un parādīt klientam progresu pirms/pēc.',
+    lv:{desc:'Profesionāls ādas analizators, kas vizualizē ādas stāvokli — poras, grumbas, pigmentāciju, mitrumu u.c. Sistēma veic detalizētu ādas analīzi pēc 12 parametriem un automātiski sagatavo personalizētus procedūru ieteikumus, kas pielāgoti tieši jūsu piedāvāto pakalpojumu klāstam.',
         treats:['Padziļināta ādas diagnostika','Procedūru plānošana pēc datiem','Klientu uzskaite un vēsture','Pirms/pēc rezultātu demonstrēšana']},
-    ru:{desc:'Профессиональный анализатор кожи: визуализирует состояние кожи (поры, морщины, пигментацию, увлажнённость), помогает подобрать процедуру и показать клиенту прогресс до/после.',
+    ru:{desc:'Профессиональный анализатор кожи, визуализирующий её состояние — поры, морщины, пигментацию, увлажнённость и др. Система проводит детальный анализ кожи по 12 параметрам и автоматически формирует персональные рекомендации по процедурам, адаптированные именно под ваш перечень услуг.',
         treats:['Углублённая диагностика кожи','Планирование процедур по данным','Учёт и история клиентов','Демонстрация результатов до/после']},
-    en:{desc:'Professional skin analyzer that visualizes skin condition (pores, wrinkles, pigmentation, hydration), helping select treatments and show clients before/after progress.',
+    en:{desc:'A professional skin analyser that visualises skin condition — pores, wrinkles, pigmentation, hydration and more. The system performs a detailed skin analysis across 12 parameters and automatically prepares personalised treatment recommendations tailored to the exact range of services you offer.',
         treats:['In-depth skin diagnostics','Data-driven treatment planning','Client records and history','Before/after result demonstration']}
   },
   'Zemits Friolift': {
-    lv:{desc:'Kontrasta ādas atjaunošanas sistēma, kas apvieno multipolāru, bipolāru un tripolāru RF ar krioterapiju, lai stimulētu kolagēnu un nostiprinātu ādu.',
+    lv:{desc:'Progresīva ādas atjaunošanas sistēma, kas apvieno radiofrekvenci (RF) ar krioterapiju, lai stimulētu kolagēnu, nostiprinātu sejas ovālu, uzlabotu ādas kvalitāti un mazinātu novecošanās pazīmes. Kontrastterapija stimulē dabiskos reģenerācijas procesus un veicina kolagēna un elastīna izstrādi, padarot ādu tvirtāku un jauneklīgāku.',
         treats:['Ādas ļenganums un kontūru zudums','Smalkas grumbiņas','Pietūkums un nogurusi āda','Sejas un ķermeņa nostiprināšana']},
-    ru:{desc:'Контрастная система омоложения: сочетает мультиполярный, биполярный и триполярный RF с криотерапией для стимуляции коллагена и подтяжки кожи.',
+    ru:{desc:'Прогрессивная система омоложения кожи, сочетающая радиочастоту (RF) с криотерапией, чтобы стимулировать коллаген, подтянуть овал лица, улучшить качество кожи и уменьшить признаки старения. Контрастная терапия запускает естественные процессы регенерации и способствует выработке коллагена и эластина, делая кожу более упругой и молодой.',
         treats:['Дряблость кожи и потеря контуров','Мелкие морщины','Отёчность и уставшая кожа','Подтяжка лица и тела']},
-    en:{desc:'Contrast rejuvenation system combining multipolar, bipolar, and tripolar RF with cryotherapy to stimulate collagen and tighten skin.',
+    en:{desc:'An advanced skin rejuvenation system combining radiofrequency (RF) with cryotherapy to stimulate collagen, firm the facial contour, improve skin quality and reduce signs of ageing. Contrast therapy stimulates natural regeneration and promotes collagen and elastin production, leaving skin firmer and more youthful.',
         treats:['Skin laxity and loss of contour','Fine lines','Puffiness and tired skin','Face and body tightening']}
   },
   'Zemits Verstand HD': {
@@ -702,27 +746,27 @@ const deviceInfo = {
         treats:['Aging and skin laxity','Clogged pores and comedones','Dehydration and dull skin','Uneven tone']}
   },
   'Zemits Celluspice Pro': {
-    lv:{desc:'Vakuuma–termomasāžas aparāts sejai un ķermenim, kas apvieno vakuuma masāžu ar siltuma iedarbību, lai uzlabotu mikrocirkulāciju, limfas aizplūšanu un ādas tonusu.',
+    lv:{desc:'Vakuuma–termomasāžas ir inovatīva ķermeņa kontūrēšanas ierīce, kas apvieno vakuuma un termisko masāžu, nodrošinot dziļu audu apstrādi un uzlabojot ādas tonusu. Pateicoties kontrolētai sildīšanai un vakuuma iedarbībai, ierīce efektīvi mazina tauku nogulsnējumus, uzlabo asinsriti un stimulē kolagēna veidošanos.',
         treats:['Celulīts un ķermeņa kontūras','Limfodrenāža un pietūkums','Ādas elastība','Atslābinoša ķermeņa masāža']},
-    ru:{desc:'Вакуумно-термомассажный аппарат для лица и тела: сочетает вакуумный массаж с тепловым воздействием для микроциркуляции, лимфооттока и тонуса кожи.',
+    ru:{desc:'Вакуумно-термомассажный аппарат — инновационное устройство для контурирования тела, сочетающее вакуумный и термический массаж: обеспечивает глубокую проработку тканей и улучшает тонус кожи. Благодаря контролируемому нагреву и вакуумному воздействию аппарат эффективно уменьшает жировые отложения, улучшает кровообращение и стимулирует выработку коллагена.',
         treats:['Целлюлит и контуры тела','Лимфодренаж и отёчность','Эластичность кожи','Расслабляющий массаж тела']},
-    en:{desc:'Vacuum thermo-massage device for face and body, combining vacuum massage with heat to improve microcirculation, lymphatic drainage, and skin tone.',
+    en:{desc:'An innovative vacuum thermo-massage device for body contouring that combines vacuum and thermal massage for deep tissue work and improved skin tone. Thanks to controlled heating and vacuum action, it effectively reduces fat deposits, improves circulation and stimulates collagen production.',
         treats:['Cellulite and body contours','Lymphatic drainage and puffiness','Skin elasticity','Relaxing body massage']}
   },
-  'Zemits Evoplasma': {
-    lv:{desc:'Aukstās plazmas aparāts ādas atjaunošanai un dezinfekcijai. Plazma palīdz attīrīt ādu, mazināt iekaisumu un uzlabot aktīvo vielu uzsūkšanos.',
+  'Zemits EvoPlasm': {
+    lv:{desc:'Zemits EvoPlasm™ ir inovatīva aukstās plazmas sistēma, kas acumirklī uzlabo jebkuras estētiskās procedūras rezultātus, attīrot, izgaismojot, atsvaidzinot un nostiprinot ādu. Plazma palīdz mazināt iekaisumu un uzlabot aktīvo vielu uzsūkšanos.',
         treats:['Problemātiska un akne nosliece','Ādas dezinfekcija un sanācija','Atjaunošana pēc procedūrām','Aktīvo vielu uzsūkšanās uzlabošana']},
-    ru:{desc:'Аппарат холодной плазмы для обновления и дезинфекции кожи. Плазма помогает очистить кожу, уменьшить воспаление и улучшить впитывание активов.',
+    ru:{desc:'Zemits EvoPlasm™ — инновационная система холодной плазмы, которая мгновенно усиливает результат любой эстетической процедуры: очищает, придаёт сияние, освежает и подтягивает кожу. Плазма помогает уменьшить воспаление и улучшает проникновение активных веществ.',
         treats:['Проблемная и склонная к акне кожа','Дезинфекция и санация кожи','Восстановление после процедур','Улучшение впитывания активов']},
-    en:{desc:'Cold plasma device for skin renewal and disinfection. Plasma helps cleanse skin, reduce inflammation, and improve active-ingredient absorption.',
+    en:{desc:'Zemits EvoPlasm™ is an innovative cold plasma system that instantly boosts the results of any aesthetic treatment by cleansing, brightening, refreshing and firming the skin. Plasma helps reduce inflammation and improves absorption of active ingredients.',
         treats:['Problematic and acne-prone skin','Skin disinfection and sanitation','Recovery after procedures','Improved active-ingredient absorption']}
   },
   'Zemits Abigon Pro': {
-    lv:{desc:'Ķermeņa un sejas sistēma ar vakuumu, RF un ultraskaņas kavitāciju, kas paredzēta ķermeņa kontūrēšanai un ādas nostiprināšanai.',
+    lv:{desc:'Zemits Abigon Pro ir moderna un visaptveroša ķermeņa kontūrēšanas sistēma, kas apvieno progresīvas tehnoloģijas, lai panāktu optimālus rezultātus ķermeņa un sejas aprises uzlabošanā, kā arī ādas nostiprināšanā.',
         treats:['Lokāli tauku uzkrājumi','Celulīts','Ādas stingrība sejai un ķermenim','Limfodrenāža']},
-    ru:{desc:'Система для тела и лица с вакуумом, RF и ультразвуковой кавитацией — для контурирования тела и подтяжки кожи.',
+    ru:{desc:'Zemits Abigon Pro — современная комплексная система контурирования тела, объединяющая передовые технологии для оптимальных результатов в улучшении контуров тела и лица, а также в подтяжке кожи.',
         treats:['Локальные жировые отложения','Целлюлит','Упругость кожи лица и тела','Лимфодренаж']},
-    en:{desc:'Body and face system with vacuum, RF, and ultrasonic cavitation for body contouring and skin tightening.',
+    en:{desc:'Zemits Abigon Pro is a modern, all-round body contouring system that combines advanced technologies for optimal results in refining body and facial contours and tightening the skin.',
         treats:['Localized fat deposits','Cellulite','Skin firmness for face and body','Lymphatic drainage']}
   },
   'Zemits Verstand Pro': {
@@ -757,6 +801,41 @@ const deviceInfo = {
     en:{desc:'Compact hydrodermabrasion system that cleanses and hydrates skin, combining hydrodermabrasion with oxygen and cold therapy.',
         treats:['Dehydration and dullness','Clogged pores','Gentle exfoliation','Quick skin refresh']}
   },
+  'Zemits OxiVelour Pro': {
+    lv:{desc:'Zemits OxiVelour piedāvā drošu un efektīvu risinājumu klientiem, kuri vēlas maksimālu ādas piesātināšanu ar skābekli un barošanu. Koncentratora sistēma no telpas gaisa ģenerē 93–95% tīra skābekļa plūsmu.'},
+    ru:{desc:'Zemits OxiVelour — безопасное и эффективное решение для клиентов, которые хотят максимально насытить кожу кислородом и питательными веществами. Система-концентратор генерирует из воздуха помещения поток 93–95% чистого кислорода.'},
+    en:{desc:'Zemits OxiVelour is a safe and effective solution for clients who want maximum oxygen saturation and nourishment of the skin. Its concentrator system generates a 93–95% pure oxygen flow from room air.'}
+  },
+  'Zemits Demeter Pro': {
+    lv:{desc:'Presoterapijas–limfodrenāžas aparāts, kas ar kontrolētu gaisa kompresiju uzlabo limfas aizplūšanu, mazina pietūkumu un smaguma sajūtu kājās.'},
+    ru:{desc:'Аппарат прессотерапии–лимфодренажа: контролируемая компрессия воздухом улучшает лимфоотток, уменьшает отёки и тяжесть в ногах.'},
+    en:{desc:'Pressotherapy / lymphatic-drainage device using controlled air compression to improve lymph flow and reduce swelling and heaviness in the legs.'}
+  },
+  'Zemits Adrinox 2.0': {
+    lv:{desc:'Zemits Adrinox 2.0 darbojas, izmantojot progresīvu tehnoloģiju, kas atjauno audu funkcionālo aktivitāti šūnu līmenī. Procedūra vispusīgi iedarbojas uz visiem ādas slāņiem, kuros norisinās patoloģiski procesi. Mikrostrāvas iedarbojas uz limfātiskās sistēmas aktivizēšanu, muskuļu pārprogramēšanu, tonizēšanu — hipertonusu un hipotonusu. Aktivizē šūnu ATF un atjaunošanās procesus.'},
+    ru:{desc:'Zemits Adrinox 2.0 использует прогрессивную технологию, восстанавливающую функциональную активность тканей на клеточном уровне. Процедура комплексно воздействует на все слои кожи, в которых протекают патологические процессы. Микротоки активизируют лимфатическую систему, перепрограммируют мышцы и нормализуют тонус — как при гипертонусе, так и при гипотонусе. Активируют синтез АТФ в клетках и процессы восстановления.'},
+    en:{desc:'Zemits Adrinox 2.0 uses advanced technology that restores the functional activity of tissue at the cellular level. The treatment works comprehensively on all skin layers where pathological processes occur. Microcurrents activate the lymphatic system, re-educate the muscles and normalise tone — in both hypertonus and hypotonus. They also stimulate cellular ATP and regeneration processes.'}
+  },
+  'Zemits Klein El': {
+    lv:{desc:'Elektroporācija ir aktīvo vielu ievadīšana, nebojājot ādas dabisko aizsargbarjeru. Procedūra ļauj aktīvajām vielām sasniegt ādas dziļākos slāņus un šūnu membrānu kanālus, tādējādi veicinot procedūras efektivitāti bez ādas bojājuma un kairinājuma.'},
+    ru:{desc:'Электропорация — введение активных веществ без нарушения естественного защитного барьера кожи. Процедура позволяет активным веществам достигать глубоких слоёв кожи и каналов клеточных мембран, повышая эффективность процедуры без повреждения и раздражения кожи.'},
+    en:{desc:'Electroporation delivers active ingredients without damaging the skin’s natural protective barrier. It allows actives to reach the deeper skin layers and cell membrane channels, boosting treatment effectiveness without skin damage or irritation.'}
+  },
+  'Zemits Skin Expert': {
+    lv:{desc:'Ultraskaņas pīlinga ierīce sejas ādas attīrīšanai.'},
+    ru:{desc:'Аппарат ультразвукового пилинга для очищения кожи лица.'},
+    en:{desc:'Ultrasonic peeling device for facial skin cleansing.'}
+  },
+  'Zemits Elastistrom': {
+    lv:{desc:'Mikrostrāvas terapijas ierīce sejai, kas strādā ar cimdiem — procedūru meistars veic ar savām rokām.'},
+    ru:{desc:'Аппарат микротоковой терапии для лица, работающий с перчатками: мастер проводит процедуру руками.'},
+    en:{desc:'Microcurrent therapy device for the face that works with gloves, so the specialist performs the treatment by hand.'}
+  },
+  'Zemits Celltite': {
+    lv:{desc:'Mikrostrāvas terapijas ierīce sejas procedūrām.'},
+    ru:{desc:'Аппарат микротоковой терапии для процедур на лице.'},
+    en:{desc:'Microcurrent therapy device for facial treatments.'}
+  },
   'Zemits Sisley 2.0': {
     lv:{desc:'Presoterapijas–limfodrenāžas aparāts, kas ar kontrolētu gaisa kompresiju uzlabo limfas aizplūšanu, mazina pietūkumu un smaguma sajūtu kājās.',
         treats:['Limfodrenāža un pietūkums','Smaguma sajūta kājās','Celulīta papildterapija','Atjaunošanās un relaksācija']},
@@ -766,11 +845,11 @@ const deviceInfo = {
         treats:['Lymphatic drainage and swelling','Heaviness in the legs','Anti-cellulite support','Recovery and relaxation']}
   },
   'Zemits Leger 2.0': {
-    lv:{desc:'Vakuuma terapijas sistēma ar metāla, plastikas un stikla uzgaļu komplektu ķermeņa formas korekcijai, masāžai un ādas tonizēšanai.',
+    lv:{desc:'Zemits Leger 2.0 ir daudzfunkcionāla vakuuma un rullīšu sistēma ar metāla, plastikas un stikla uzgaļu komplektu ķermeņa formas korekcijai, limfas atteces veicināšanai, masāžai un ādas tonizēšanai.',
         treats:['Ķermeņa formas korekcija','Sēžamvietu modelēšana','Celulīts','Mikrocirkulācija un ādas tonuss']},
-    ru:{desc:'Система вакуумной терапии с набором металлических, пластиковых и стеклянных насадок для коррекции формы тела, массажа и тонизирования кожи.',
+    ru:{desc:'Zemits Leger 2.0 — многофункциональная вакуумно-роликовая система с набором металлических, пластиковых и стеклянных насадок для коррекции фигуры, улучшения лимфооттока, массажа и тонизирования кожи.',
         treats:['Коррекция формы тела','Моделирование ягодиц','Целлюлит','Микроциркуляция и тонус кожи']},
-    en:{desc:'Vacuum therapy system with metal, plastic, and glass tips for body shaping, massage, and skin toning.',
+    en:{desc:'Zemits Leger 2.0 is a multifunctional vacuum and roller system with a set of metal, plastic and glass attachments for body shaping, lymphatic drainage, massage and skin toning.',
         treats:['Body shape correction','Buttock modeling','Cellulite','Microcirculation and skin tone']}
   },
   'Zemits Vivalumix': {
@@ -798,15 +877,17 @@ const deviceImg = {
   'Zemits Endoluxx Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/4.png',
   'Zemits Bionexis Lite':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/5.png',
   'Zemits Verstand HD Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/6.png',
-  'Zemits Veraface':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/7.png',
+  'Zemits Veraface':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/Updated/3.jpg',
   'Zemits Friolift':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/8.png',
-  'Zemits Verstand HD':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/9.png',
+  'Zemits Verstand HD':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/Updated/5.jpg',
+  'Zemits OxiVelour Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/Updated/1.jpg',
   'Zemits Celluspice Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/10.png',
-  'Zemits Evoplasma':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/11.png',
+  'Zemits EvoPlasm':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/11.png',
   'Zemits Abigon Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/12.png',
   'Zemits Verstand Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/13.png',
   'Zemits Eau Sante NG':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/14.png',
-  'Zemits Verstand':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/15.png',
+  'Zemits Verstand':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/Updated/2.jpg',
+  'Zemits Demeter Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/Updated/4.jpg',
   'Zemits Dermeluxx Pro':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/16.png',
   'Zemits Sisley 2.0':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/17.png',
   'Zemits Leger 2.0':'https://ik.imagekit.io/xwsgpirygo/Zemits/aparati/18.png',
@@ -844,9 +925,7 @@ function renderDevices(){
       ? `<div class="eq-price">${priceTxt}</div>`
       : `<div class="eq-price req">${t.ui_onrequest}</div>`;
     const safeName = d.name.replace(/'/g, "\\'");
-    const btnHtml = deviceInfo[d.name]
-      ? `<button class="eq-req eq-learn" onclick="openDeviceModal('${safeName}')">${t.ui_learn}</button>`
-      : `<button class="eq-req" onclick="requestDevice('${safeName}')">${d.price !== null ? t.ui_contact : t.ui_request}</button>`;
+    const btnHtml = `<button class="eq-req eq-learn" onclick="openDeviceModal('${safeName}')">${t.ui_learn}</button>`;
     const img = deviceImg[d.name];
     return `
       <div class="eq-card reveal">
@@ -895,16 +974,16 @@ function setLang(lang){
 /* ── DEVICE MODAL ── */
 function openDeviceModal(name){
   const d = devices.find(x => x.name === name);
-  const info = deviceInfo[name];
-  if(!d || !info) return;
+  if(!d) return;
   const t = i18n[currentLang], L = currentLang;
+  const li = (deviceInfo[name] && deviceInfo[name][L]) || {};
   const tagLabel = t['tag_' + d.tag];
   let priceTxt = fmtPrice(d.price);
   if (priceTxt && d.from) priceTxt = `${t.ui_from} ${priceTxt}`;
   const priceHtml = priceTxt ? `<div class="dm-price">${priceTxt}</div>` : `<div class="dm-price req">${t.ui_onrequest}</div>`;
   const feats = d.feat[L].map(f => `<li>${f}</li>`).join('');
-  const sizesBlock = (info[L].sizes && info[L].sizes.length)
-    ? `<div class="dm-included"><div class="dm-h">${t.m_sizes}</div><ul class="dm-list">${info[L].sizes.map(s => `<li>${s}</li>`).join('')}</ul></div>`
+  const sizesBlock = (li.sizes && li.sizes.length)
+    ? `<div class="dm-included"><div class="dm-h">${t.m_sizes}</div><ul class="dm-list">${li.sizes.map(s => `<li>${s}</li>`).join('')}</ul></div>`
     : '';
   const inc = [t.inc_train, t.inc_warranty, t.inc_support, t.inc_manual, t.inc_ce].map(f => `<li>${f}</li>`).join('');
   const img = deviceImg[d.name];
@@ -918,7 +997,7 @@ function openDeviceModal(name){
         <div class="dm-type">${d.type[L]}</div>
       </div>
     </div>
-    <p class="dm-desc">${info[L].desc}</p>
+    ${li.desc ? `<p class="dm-desc">${li.desc}</p>` : ''}
     <div class="dm-grid one">
       <div class="dm-block"><div class="dm-h">${t.m_tech}</div><ul class="dm-list">${feats}</ul></div>
     </div>
